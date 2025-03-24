@@ -11,6 +11,21 @@ local_css("style.css")
 
 st.title("🌿 Living Diary")
 st.markdown("_A soft place to land when you're feeling emotionally full or need support._")
+import random
+
+prompts = [
+    "What part of me is asking to be seen today?",
+    "How can I offer myself more kindness in this moment?",
+    "What emotions have been sitting with me lately?",
+    "If my heart could speak, what would it say?",
+    "Where in my body am I holding tension or softness?",
+    "What would it feel like to fully accept myself today?",
+    "What am I ready to let go of right now?"
+]
+
+selected_prompt = random.choice(prompts)
+
+st.markdown(f"💭 _Today's gentle reflection:_ **{selected_prompt}**")
 
 @st.cache_data
 def load_data():
