@@ -15,23 +15,26 @@ df = load_data()
 user_input = st.text_area("What's on your mind today?")
 
 if st.button("Reflect with me") and user_input:
-    user_input_lower = user_input.lower()
+    user_input_lower = user_input.lower().split()
 
-    # Try to find the best matching resource
-    match = None
-    for index, row in df.iterrows():
-        themes = row['Themes'].lower()
-        if any(word in themes for word in user_input_lower.split()):
-            match = row
-            break
+    best_match = None
+    best_match_count = 0
 
-    if match is not None:
-        st.markdown("**Here you go — you can view or download _{}_:**".format(match["Title"]))
-        st.markdown(f"[{match['Title']}]({match['Link']})")
+    # Check all rows and count keyword matches
+    for _, row in df.iterrows():
+        themes = row['Themes'].lower().split(',')
+        themes = [theme.strip() for theme in themes]
+        match_count = sum(1 for word in user_input_lower if word in ' '.join(themes))
+
+        if match_count > best_match_count:
+            best_match = row
+            best_match_count = match_count
+
+    if best_match_count > 0:
+        st.markdown(f"**Here you go — you can view or download _{best_match['Title']}_:**")
+        st.markdown(f"[{best_match['Title']}]({best_match['Link']})")
         st.info("Even just one page can be enough today. You’re already doing something kind for yourself.")
     else:
         st.warning("I didn’t find a resource that matches those exact feelings… and that’s okay.")
         st.markdown("Would you like a journaling prompt instead?")
         st.markdown("**Prompt:** What part of me is asking to be seen right now?")
-
-
