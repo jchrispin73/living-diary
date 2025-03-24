@@ -1,31 +1,38 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
 body {
-    background-color: #f7f6f3;
+    background: linear-gradient(to bottom right, #f6f0ff, #f9f7fc);
     font-family: 'Quicksand', sans-serif;
+    color: #4a3c4c;
 }
 
 .stTextInput, .stTextArea, .stButton button {
-    border-radius: 10px;
+    border-radius: 12px;
+    font-family: 'Quicksand', sans-serif;
 }
 
 h1, .stMarkdown h1 {
     font-weight: 600;
-    color: #354f52;
+    color: #5f4b8b;
     text-align: center;
 }
 
 .stMarkdown {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: #4a4a4a;
+    color: #5a4d63;
 }
 
 .stButton button {
-    background-color: #d4e9e2;
-    color: #2e3d3a;
+    background-color: #e6d9f6;
+    color: #4a3c4c;
     font-weight: bold;
-    padding: 0.5em 1.5em;
+    padding: 0.6em 1.6em;
+    transition: all 0.3s ease-in-out;
 }
 
 .stButton button:hover {
-    background-color: #bde0d6;
+    background-color: #d2b9ec;
+    transform: scale(1.03);
 }
