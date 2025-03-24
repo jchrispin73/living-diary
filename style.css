@@ -1,0 +1,31 @@
+body {
+    background-color: #f7f6f3;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.stTextInput, .stTextArea, .stButton button {
+    border-radius: 10px;
+}
+
+h1, .stMarkdown h1 {
+    font-weight: 600;
+    color: #354f52;
+    text-align: center;
+}
+
+.stMarkdown {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #4a4a4a;
+}
+
+.stButton button {
+    background-color: #d4e9e2;
+    color: #2e3d3a;
+    font-weight: bold;
+    padding: 0.5em 1.5em;
+}
+
+.stButton button:hover {
+    background-color: #bde0d6;
+}
