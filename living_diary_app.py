@@ -6,7 +6,7 @@ import openai
 # Load your CSV file
 @st.cache_data
 def load_data():
-    return pd.read_csv("Living_Diary_Tool_Ready.csv")
+    return pd.read_csv("Living_Diary_Manual_Link_FINAL.csv")
 
 df = load_data()
 
