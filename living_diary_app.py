@@ -58,6 +58,18 @@ def load_data():
 df = load_data()
 
 user_input = st.text_area("What's on your mind today?")
+from datetime import datetime
+
+# Show today's date and time
+now = datetime.now()
+formatted_time = now.strftime("%A, %d %B %Y at %I:%M %p")
+
+if user_input:
+    st.markdown("---")
+    st.markdown("### 📝 Your Living Diary Entry")
+    st.markdown(f"**Date:** {formatted_time}")
+    st.markdown(f"**Mood:** {mood}")
+    st.markdown(f"**Entry:** {user_input}")
 
 if st.button("Reflect with me") and user_input:
     user_input_lower = user_input.lower().split()
