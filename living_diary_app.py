@@ -8,15 +8,6 @@ def local_css(file_name):
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 local_css("style.css")
-import streamlit as st
-import pandas as pd
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-local_css("style.css")
-
-st.set_page_config(page_title="Living Diary", page_icon="🌿")
 
 st.title("🌿 Living Diary")
 st.markdown("_A soft place to land when you're feeling emotionally full or need support._")
@@ -52,4 +43,4 @@ if st.button("Reflect with me") and user_input:
     else:
         st.warning("I didn’t find a resource that matches those exact feelings… and that’s okay.")
         st.markdown("Would you like a journaling prompt instead?")
-        st.markdown("**Prompt:** What part of me is asking to be seen right now?")
+        st.markdown("**Prompt:** What part of me is asking to be seen right now?") 
