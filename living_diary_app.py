@@ -26,6 +26,30 @@ prompts = [
 selected_prompt = random.choice(prompts)
 
 st.markdown(f"💭 _Today's gentle reflection:_ **{selected_prompt}**")
+st.markdown("---")
+mood = st.selectbox("How are you feeling today?", [
+    "🌤 Calm",
+    "🌧 Anxious",
+    "🔥 Overwhelmed",
+    "🌙 Reflective",
+    "🌸 Grateful",
+    "💤 Tired",
+    "🎢 Mixed Emotions",
+    "🌊 Heavy-hearted"
+])
+
+mood_messages = {
+    "🌤 Calm": "May this calm stay with you gently through the day.",
+    "🌧 Anxious": "You’re safe right now. One breath at a time.",
+    "🔥 Overwhelmed": "It’s okay to pause. Everything doesn’t need to be solved at once.",
+    "🌙 Reflective": "You’re allowed to explore your thoughts slowly, softly.",
+    "🌸 Grateful": "That warmth you’re feeling is beautiful—let it grow.",
+    "💤 Tired": "Rest is not a reward. It’s a right. You’ve earned softness today.",
+    "🎢 Mixed Emotions": "It’s okay to hold more than one feeling at once. Be kind to them all.",
+    "🌊 Heavy-hearted": "You’re not alone. Let your heart be held here for a moment."
+}
+
+st.info(mood_messages.get(mood, "You are allowed to feel exactly as you do."))
 
 @st.cache_data
 def load_data():
