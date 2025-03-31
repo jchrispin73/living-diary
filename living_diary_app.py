@@ -48,7 +48,25 @@ st.markdown(f"🌈 *{selected_prompt}*")
 
 # ✍️ Journaling text box
 st.markdown("You can type below if you'd like to reflect:")
-user_entry = st.text_area(" ", height=200)
 
-if user_entry:
-    st.success("💖 Your words matter. Saved for this session — feel free to copy it into your journal.")
+if "entries" not in st.session_state:
+    st.session_state.entries = []
+
+user_entry = st.text_area(" ", height=200, key="journal_input")
+
+if st.button("Save Entry"):
+    if user_entry.strip():
+        st.session_state.entries.append({
+            "mood": mood,
+            "prompt": selected_prompt,
+            "entry": user_entry.strip()
+        })
+        st.success("✅ Entry saved. You can scroll down to view it below.")
+        st.session_state.journal_input = ""  # Clear the input box
+
+# 📓 Display saved entries
+if st.session_state.entries:
+    st.markdown("### 📝 Your Journal Entries (This Session)")
+    for i, e in enumerate(reversed(st.session_state.entries), 1):
+        with st.expander(f"{i}. Mood: {e['mood']} — Prompt: {e['prompt']}"):
+            st.write(e['entry'])
