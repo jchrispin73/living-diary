@@ -7,7 +7,7 @@ import random
 st.set_page_config(page_title="Living Diary", page_icon="🌿")
 
 # 🌸 Load and display the logo
-logo = Image.open("FullLogo_NoBuffer.jpg")
+logo = Image.open("FullLogo_Transparent_NoBuffer.png")
 st.image(logo, width=300)
 
 # 🎨 Apply custom CSS
