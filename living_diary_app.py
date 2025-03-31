@@ -2,9 +2,12 @@ import streamlit as st
 from PIL import Image
 import pandas as pd
 import random
+# 🌸 Display logo (centered and resized)
+logo = Image.open("FullLogo_Transparent_NoBuffer.png")
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    st.image(logo, width=180)
 
-# 🌿 Page config (must be first)
-st.set_page_config(page_title="Living Diary", page_icon="🌿")
 
 # 🎨 Custom CSS
 def local_css(file_name):
