@@ -1,24 +1,27 @@
 import streamlit as st
 from PIL import Image
-
-# Show the Living Diary logo at the top
-logo = Image.open("Faded_Living_Diary_Logo.png")
-st.image(logo, width=300)
-
 import pandas as pd
+import random
 
+# ✅ MUST be the first Streamlit command
 st.set_page_config(page_title="Living Diary", page_icon="🌿")
 
+# 🌸 Load and display the logo
+logo = Image.open("FullLogo_NoBuffer.jpg")
+st.image(logo, width=300)
+
+# 🎨 Apply custom CSS
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 local_css("style.css")
 
+# 💜 App Title and Subtitle
 st.title("🌿 Living Diary")
 st.markdown("_A soft place to land when you're feeling emotionally full or need support._")
-import random
 
+# ✍️ Gentle journaling prompts
 prompts = [
     "What part of me is asking to be seen today?",
     "How can I offer myself more kindness in this moment?",
@@ -31,73 +34,13 @@ prompts = [
 
 selected_prompt = random.choice(prompts)
 
-st.markdown(f"💭 _Today's gentle reflection:_ **{selected_prompt}**")
+st.markdown("### Here's a gentle journaling prompt for you:")
+st.markdown(f"🪷 *{selected_prompt}*")
+
+# 📝 Input area
+user_entry = st.text_area("You can type below if you'd like to reflect:", height=150)
+
+# 📁 Placeholder for resource delivery later
 st.markdown("---")
-mood = st.selectbox("How are you feeling today?", [
-    "🌤 Calm",
-    "🌧 Anxious",
-    "🔥 Overwhelmed",
-    "🌙 Reflective",
-    "🌸 Grateful",
-    "💤 Tired",
-    "🎢 Mixed Emotions",
-    "🌊 Heavy-hearted"
-])
+st.markdown("✨ More support features (like calming quotes or downloadable workbooks) coming soon.")
 
-mood_messages = {
-    "🌤 Calm": "May this calm stay with you gently through the day.",
-    "🌧 Anxious": "You’re safe right now. One breath at a time.",
-    "🔥 Overwhelmed": "It’s okay to pause. Everything doesn’t need to be solved at once.",
-    "🌙 Reflective": "You’re allowed to explore your thoughts slowly, softly.",
-    "🌸 Grateful": "That warmth you’re feeling is beautiful—let it grow.",
-    "💤 Tired": "Rest is not a reward. It’s a right. You’ve earned softness today.",
-    "🎢 Mixed Emotions": "It’s okay to hold more than one feeling at once. Be kind to them all.",
-    "🌊 Heavy-hearted": "You’re not alone. Let your heart be held here for a moment."
-}
-
-st.info(mood_messages.get(mood, "You are allowed to feel exactly as you do."))
-
-@st.cache_data
-def load_data():
-    return pd.read_csv("Living_Diary_Manual_Link_FINAL.csv")
-
-df = load_data()
-
-user_input = st.text_area("What's on your mind today?")
-from datetime import datetime
-
-# Show today's date and time
-now = datetime.now()
-formatted_time = now.strftime("%A, %d %B %Y at %I:%M %p")
-
-if user_input:
-    st.markdown("---")
-    st.markdown("### 📝 Your Living Diary Entry")
-    st.markdown(f"**Date:** {formatted_time}")
-    st.markdown(f"**Mood:** {mood}")
-    st.markdown(f"**Entry:** {user_input}")
-
-if st.button("Reflect with me") and user_input:
-    user_input_lower = user_input.lower().split()
-
-    best_match = None
-    best_match_count = 0
-
-    # Check all rows and count keyword matches
-    for _, row in df.iterrows():
-        themes = row['Themes'].lower().split(',')
-        themes = [theme.strip() for theme in themes]
-        match_count = sum(1 for word in user_input_lower if word in ' '.join(themes))
-
-        if match_count > best_match_count:
-            best_match = row
-            best_match_count = match_count
-
-    if best_match_count > 0:
-        st.markdown(f"**Here you go — you can view or download _{best_match['Title']}_:**")
-        st.markdown(f"[{best_match['Title']}]({best_match['Link']})")
-        st.info("Even just one page can be enough today. You’re already doing something kind for yourself.")
-    else:
-        st.warning("I didn’t find a resource that matches those exact feelings… and that’s okay.")
-        st.markdown("Would you like a journaling prompt instead?")
-        st.markdown("**Prompt:** What part of me is asking to be seen right now?") 
