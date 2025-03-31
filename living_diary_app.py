@@ -3,25 +3,32 @@ from PIL import Image
 import pandas as pd
 import random
 
-# 🌿 Set page config FIRST
+# 🌿 Page config (must be first)
 st.set_page_config(page_title="Living Diary", page_icon="🌿")
 
-# 🎨 Apply custom CSS
+# 🎨 Custom CSS
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 local_css("style.css")
 
-# 🌸 Display logo properly
+# 🌸 Display logo (centered, transparent background)
 logo = Image.open("FullLogo_Transparent_NoBuffer.png")
 st.image(logo, width=240)
 
-# 🌼 Title and intro
+# 🧘 Title and intro
 st.title("🌿 Living Diary")
 st.markdown("_A soft place to land when you're feeling emotionally full or need support._")
 
-# 📝 Journaling prompt
+# 🧠 Mood selector
+st.markdown("#### How are you feeling right now?")
+mood = st.selectbox(
+    "Choose your mood:",
+    ["🌤️ Calm", "🌧️ Sad", "⛅ Overwhelmed", "🌪️ Anxious", "☀️ Hopeful", "🌙 Tired", "🪷 Grounded"]
+)
+
+# ✨ Journaling prompt
 prompts = [
     "What part of me is asking to be seen today?",
     "How can I offer myself more kindness in this moment?",
@@ -37,9 +44,9 @@ selected_prompt = random.choice(prompts)
 st.markdown("### Here's a gentle journaling prompt for you:")
 st.markdown(f"🌈 *{selected_prompt}*")
 
-# 💬 Reflection box
+# ✍️ Journaling text box
 st.markdown("You can type below if you'd like to reflect:")
 user_entry = st.text_area(" ", height=200)
 
 if user_entry:
-    st.success("🌷 Reflection saved for this session. You can always copy it into your own journal.")
+    st.success("💖 Your words matter. Saved for this session — feel free to copy it into your journal.")
