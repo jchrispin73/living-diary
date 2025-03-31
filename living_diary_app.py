@@ -1,4 +1,10 @@
 import streamlit as st
+from PIL import Image
+
+# Show the Living Diary logo at the top
+logo = Image.open("Faded_Living_Diary_Logo.png")
+st.image(logo, width=300)
+
 import pandas as pd
 
 st.set_page_config(page_title="Living Diary", page_icon="🌿")
