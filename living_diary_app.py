@@ -46,7 +46,11 @@ if st.button("💜 Save Entry"):
 
 # Resource matching from keywords
 if user_entry:
-    df = pd.read_csv("Enhanced_Living_Diary_Index_UPDATED.csv")
+    try:
+        df = pd.read_csv("Enhanced_Living_Diary_Index_UPDATED.csv")
+    except FileNotFoundError:
+        st.error("🚫 The file 'Enhanced_Living_Diary_Index_UPDATED.csv' was not found. Make sure it's uploaded and named correctly.")
+        st.stop()
 
     user_words = set(re.findall(r'\w+', user_entry.lower()))
 
