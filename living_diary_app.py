@@ -57,7 +57,7 @@ if st.button("💜 Save Entry"):
 
 # Resource matching from keywords
 if user_entry:
-    df = pd.read_csv("Living_Diary_Complete_Index_with_All_Keywords.csv")
+   df = pd.read_csv("Enhanced_Living_Diary_Index.csv")
     user_words = set(re.findall(r'\w+', user_entry.lower()))
 
     def score_row(row):
