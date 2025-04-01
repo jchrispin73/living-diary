@@ -1,11 +1,6 @@
 import streamlit as st
 
 # ✅ Must be at the top, before any Streamlit commands
-st.set_page_config(
-    page_title="Living Diary",
-    layout="centered",
-    initial_sidebar_state="auto"
-)
 
 def show_home_page():
     st.markdown(
