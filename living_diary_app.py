@@ -8,10 +8,6 @@ st.set_page_config(
     layout="centered",  # Ensure content is centered
     initial_sidebar_state="collapsed"  # Collapse sidebar by default
 )
-
-# Remove the sidebar completely
-st.sidebar.empty()
-
 # Use st.columns to manage layout
 col1, col2, col3, col4 = st.columns([1, 1, 1, 1])  # Adjust proportions for responsiveness
 
