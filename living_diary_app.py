@@ -2,38 +2,41 @@ import streamlit as st
 from home_page import show_home_page
 from gratitude_journal import show_gratitude_journal
 
-# Set up the page configuration without the sidebar
+# Must be the very first Streamlit command
 st.set_page_config(
     page_title="Living Diary",
-    layout="centered",  # Center content
-    initial_sidebar_state="collapsed"
+    layout="centered",  # Ensure content is centered
+    initial_sidebar_state="collapsed"  # Collapse sidebar by default
 )
 
-# Using columns to manage the button layout in a responsive way
-col1, col2, col3, col4 = st.columns([1, 1, 1, 1])  # Equal width for desktop
+# Adjust layout for mobile and desktop responsiveness
+col1, col2 = st.columns([1, 1])  # 2 equal columns
 
 with col1:
-    home_button = st.button("Home")
+    home_button = st.button("Home", use_container_width=True)
 
 with col2:
-    gratitude_button = st.button("Gratitude Journal")
+    gratitude_button = st.button("Gratitude Journal", use_container_width=True)
+
+# Additional buttons below, still using use_container_width for alignment
+col3, col4 = st.columns([1, 1])  # 2 equal columns
 
 with col3:
-    profile_button = st.button("Profile")
+    profile_button = st.button("Profile", use_container_width=True)
 
 with col4:
-    resources_button = st.button("Resources")
+    resources_button = st.button("Resources", use_container_width=True)
 
-# Creating a new row for 'Settings' and 'Talk' buttons, ensuring responsiveness
-col5, col6 = st.columns([1, 1])  # Adjusting for smaller screens
+# Bottom buttons (Settings, Talk) on another row
+col5, col6 = st.columns([1, 1])
 
 with col5:
-    settings_button = st.button("Settings")
+    settings_button = st.button("Settings", use_container_width=True)
 
 with col6:
-    talk_button = st.button("Talk")
+    talk_button = st.button("Talk", use_container_width=True)
 
-# Default page set to "Home" if no button is pressed
+# Default page set to "Home"
 if not home_button and not gratitude_button:
     home_button = True  # Set "Home" as default if no button is pressed yet
 
