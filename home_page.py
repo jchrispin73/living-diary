@@ -1,7 +1,6 @@
 import streamlit as st
 
 # Set page config FIRST before any other Streamlit command
-st.set_page_config(page_title="Living Diary", layout="centered")
 
 def show_home_page():
     # Show your logo (adjust path or width if needed)
