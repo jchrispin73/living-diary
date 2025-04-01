@@ -5,13 +5,15 @@ from gratitude_journal import show_gratitude_journal
 # ✅ Must be the very first Streamlit command
 st.set_page_config(
     page_title="Living Diary",
-    layout="centered",
-    initial_sidebar_state="auto"
+    layout="centered",  # Ensure content is centered
+    initial_sidebar_state="collapsed"  # Collapse sidebar by default
 )
 
-# Sidebar navigation
-st.sidebar.title("🌿 Living Diary")
-page = st.sidebar.radio("Navigate", ["Home", "Gratitude Journal"])
+# Remove sidebar completely
+st.sidebar.empty()
+
+# Main navigation
+page = st.radio("Navigate", ["Home", "Gratitude Journal"])
 
 # Page content based on selection
 if page == "Home":
