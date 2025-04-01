@@ -8,10 +8,6 @@ st.set_page_config(
     layout="centered",  # Ensure content is centered
     initial_sidebar_state="collapsed"  # Collapse sidebar by default
 )
-
-# Remove the sidebar completely
-st.sidebar.empty()
-
 # Check for screen width to adjust button layout for responsiveness
 if st.beta_set_page_config(layout="wide"):  # Check if layout is wide for larger screens
     button_columns = st.columns(4)  # Display buttons in 4 columns on larger screens
