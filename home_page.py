@@ -14,7 +14,7 @@ def show_home_page():
     # Centered logo
     st.markdown("""
     <div style="text-align: center;">
-        <img src="https://raw.githubusercontent.com/jchrispin73/living-diary/main/FullLogo_Transparent_NoBuffer.png" width="300">
+        <img src="https://raw.githubusercontent.com/jchrispin73/living-diary/main/FullLogo_Transparent_NoBuffer.png" width="180">
     </div>
     """, unsafe_allow_html=True)
 
