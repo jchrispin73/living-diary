@@ -5,35 +5,32 @@ from gratitude_journal import show_gratitude_journal
 # Must be the very first Streamlit command
 st.set_page_config(
     page_title="Living Diary",
-    layout="centered",  # Ensure content is centered
+    layout="wide",  # Set layout to "wide" for wider screens
     initial_sidebar_state="collapsed"  # Collapse sidebar by default
 )
-# Check for screen width to adjust button layout for responsiveness
-if st.beta_set_page_config(layout="wide"):  # Check if layout is wide for larger screens
-    button_columns = st.columns(4)  # Display buttons in 4 columns on larger screens
-else:
-    button_columns = st.columns(2)  # Display buttons in 2 columns on smaller screens
 
-# First row of buttons
-with button_columns[0]:
+# Use st.columns to manage layout
+col1, col2, col3, col4 = st.columns([1, 1, 1, 1])  # Adjust proportions for responsiveness
+
+with col1:
     home_button = st.button("Home")
 
-with button_columns[1]:
+with col2:
     gratitude_button = st.button("Gratitude Journal")
 
-with button_columns[2]:
+with col3:
     profile_button = st.button("Profile")
 
-with button_columns[3]:
+with col4:
     resources_button = st.button("Resources")
 
-# Second row for Settings and Talk buttons
-button_columns_2 = st.columns(2)
+# Place 'Settings' and 'Talk' buttons beneath the first row on smaller screens
+col5, col6 = st.columns([1, 1])
 
-with button_columns_2[0]:
+with col5:
     settings_button = st.button("Settings")
 
-with button_columns_2[1]:
+with col6:
     talk_button = st.button("Talk")
 
 # Default page set to "Home"
