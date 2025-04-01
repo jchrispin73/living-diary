@@ -9,10 +9,9 @@ st.set_page_config(
     initial_sidebar_state="collapsed"  # Collapse sidebar by default
 )
 
-# Main navigation buttons (displayed next to each other)
-col1, col2, col3, col4 = st.columns(4)
+# Adjust the spacing for the buttons (placed next to each other)
+col1, col2, col3, col4 = st.columns([1, 1, 1, 1])  # Equal width for each column
 
-# Adjust button placement for each column
 with col1:
     home_button = st.button("Home")
 
@@ -25,7 +24,15 @@ with col3:
 with col4:
     resources_button = st.button("Resources")
 
-# Ensure buttons are stacked in mobile view
+# Add the "Talk" button
+col5, col6 = st.columns([1, 1])  # This ensures the new buttons are placed in a separate line if needed
+with col5:
+    settings_button = st.button("Settings")
+
+with col6:
+    talk_button = st.button("Talk")
+
+# Ensure buttons stack in mobile view
 st.markdown(
     """
     <style>
