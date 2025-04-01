@@ -64,7 +64,12 @@ if st.button("Save Entry"):
 df = pd.read_csv("Living_Diary_Complete_Index_with_Images (1).csv")
 
 # Find resource that matches the mood
-matched_resource = df[df['Folder'].str.contains(mood.split()[-1], case=False, na=False)]
+import re
+
+# Extract mood name only (remove emojis and extra spaces)
+clean_mood = re.sub(r'[^\w\s]', '', mood).strip().lower()
+
+matched_resource = df[df['Folder'].str.lower().str.strip() == clean_mood]
 
 if not matched_resource.empty:
     resource = matched_resource.sample(1).iloc[0]
