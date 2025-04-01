@@ -12,8 +12,8 @@ st.set_page_config(
 # Remove the sidebar completely
 st.sidebar.empty()
 
-# Main navigation buttons (displayed in two columns)
-col1, col2 = st.columns(2)
+# Main navigation buttons (adjusted for mobile responsiveness)
+col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     home_button = st.button("Home")
@@ -21,10 +21,10 @@ with col1:
 with col2:
     gratitude_button = st.button("Gratitude Journal")
 
-with col1:
+with col3:
     profile_button = st.button("Profile")
 
-with col2:
+with col4:
     resources_button = st.button("Resources")
 
 with col1:
