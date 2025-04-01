@@ -59,7 +59,7 @@ if user_entry:
     if not top_match.empty:
         resource = top_match.iloc[0]
         st.markdown("### Based on how you're feeling, this might help:")
-        st.image(resource['Image_Link'], width=300)
+        st.image(resource['Drive Link'], width=300)
         st.markdown(f"**{resource['Quote']}**")
         st.markdown(f"[Download Resource PDF]({resource['PDF_Link']})", unsafe_allow_html=True)
     else:
