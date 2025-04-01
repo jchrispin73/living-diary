@@ -13,7 +13,7 @@ st.set_page_config(
 st.sidebar.title("🌿 Living Diary")
 page = st.sidebar.radio("Navigate", ["Home", "Gratitude Journal"])
 
-# Page router
+# Page content based on selection
 if page == "Home":
     show_home_page()
 elif page == "Gratitude Journal":
