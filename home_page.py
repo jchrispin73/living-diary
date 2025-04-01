@@ -1,13 +1,12 @@
 import streamlit as st
 
-# This must be OUTSIDE any function — very top after imports
+# ✅ Must be at the top, before any Streamlit commands
 st.set_page_config(
     page_title="Living Diary",
     layout="centered",
     initial_sidebar_state="auto"
 )
 
-# Now your page function
 def show_home_page():
     st.markdown(
         """
@@ -19,6 +18,7 @@ def show_home_page():
     )
 
     st.markdown("### 🌈 Here's a gentle journaling prompt for you:")
+
     prompt = st.selectbox("Pick a prompt", [
         "If my heart could speak, what would it say?",
         "Right now, I am feeling...",
@@ -26,7 +26,7 @@ def show_home_page():
     ])
 
     mood = st.selectbox("Pick a mood to help match your reflection to a resource:", [
-        "😌 Calm", "😴 Tired", "😞 Sad", "😡 Angry", "😊 Joyful"
+        "😌 Calm", "😴 Tired", "😔 Sad", "😡 Angry", "😊 Joyful"
     ])
 
     journal = st.text_area("You can type below if you'd like to reflect:")
