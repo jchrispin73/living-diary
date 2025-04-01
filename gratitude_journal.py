@@ -1,4 +1,4 @@
-iimport streamlit as st
+import streamlit as st
 
 def show_gratitude_journal():
     st.title("🌸 Gratitude Journal")
