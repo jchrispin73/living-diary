@@ -9,8 +9,11 @@ st.set_page_config(
     initial_sidebar_state="collapsed"  # Collapse sidebar by default
 )
 
-# Adjust the spacing for the buttons (placed next to each other)
-col1, col2, col3, col4 = st.columns([1, 1, 1, 1])  # Equal width for each column
+# Remove the sidebar completely
+st.sidebar.empty()
+
+# Main navigation buttons (displayed in two columns)
+col1, col2 = st.columns(2)
 
 with col1:
     home_button = st.button("Home")
@@ -18,35 +21,17 @@ with col1:
 with col2:
     gratitude_button = st.button("Gratitude Journal")
 
-with col3:
+with col1:
     profile_button = st.button("Profile")
 
-with col4:
+with col2:
     resources_button = st.button("Resources")
 
-# Add the "Talk" button
-col5, col6 = st.columns([1, 1])  # This ensures the new buttons are placed in a separate line if needed
-with col5:
+with col1:
     settings_button = st.button("Settings")
 
-with col6:
+with col2:
     talk_button = st.button("Talk")
-
-# Ensure buttons stack in mobile view
-st.markdown(
-    """
-    <style>
-    @media screen and (max-width: 800px) {
-        .stButton > button {
-            display: block;
-            width: 100%;
-            margin: 10px 0;
-        }
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 # Default page set to "Home"
 if not home_button and not gratitude_button:
