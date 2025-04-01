@@ -12,8 +12,8 @@ st.set_page_config(
 # Remove the sidebar completely
 st.sidebar.empty()
 
-# Main navigation buttons (adjusted for mobile responsiveness)
-col1, col2, col3, col4 = st.columns(4)
+# Use st.columns to manage layout
+col1, col2, col3, col4 = st.columns([1, 1, 1, 1])  # Adjust proportions for responsiveness
 
 with col1:
     home_button = st.button("Home")
@@ -27,10 +27,13 @@ with col3:
 with col4:
     resources_button = st.button("Resources")
 
-with col1:
+# Place 'Settings' and 'Talk' buttons beneath the first row on smaller screens
+col5, col6 = st.columns([1, 1])
+
+with col5:
     settings_button = st.button("Settings")
 
-with col2:
+with col6:
     talk_button = st.button("Talk")
 
 # Default page set to "Home"
