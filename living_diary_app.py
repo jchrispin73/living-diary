@@ -8,28 +8,30 @@ st.set_page_config(
     layout="centered",  # Ensure content is centered
     initial_sidebar_state="collapsed"  # Collapse sidebar by default
 )
-# Use st.columns to manage layout
-col1, col2, col3, col4 = st.columns([1, 1, 1, 1])  # Adjust proportions for responsiveness
+# Create the buttons in a responsive layout
+# For smaller screens, they will stack; for larger screens, they will be in a row.
+button_columns = st.columns(4)
 
-with col1:
+# Use the first row for the main buttons
+with button_columns[0]:
     home_button = st.button("Home")
-
-with col2:
+    
+with button_columns[1]:
     gratitude_button = st.button("Gratitude Journal")
 
-with col3:
+with button_columns[2]:
     profile_button = st.button("Profile")
 
-with col4:
+with button_columns[3]:
     resources_button = st.button("Resources")
 
-# Place 'Settings' and 'Talk' buttons beneath the first row on smaller screens
-col5, col6 = st.columns([1, 1])
+# Use the second row for the "Settings" and "Talk" buttons
+button_columns_2 = st.columns(2)
 
-with col5:
+with button_columns_2[0]:
     settings_button = st.button("Settings")
 
-with col6:
+with button_columns_2[1]:
     talk_button = st.button("Talk")
 
 # Default page set to "Home"
