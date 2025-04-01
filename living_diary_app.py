@@ -61,6 +61,6 @@ if user_entry:
         resource = top_match.iloc[0]
         st.markdown("### Based on how you're feeling, this might help:")
         st.markdown(f"**{resource.get('Quote', 'Here’s something gentle to explore.')}**")
-      st.markdown(f"📝 Here's a journal you might find supportive: [*{resource['File Name']}*]({resource['Drive Link']})", unsafe_allow_html=True)
+        st.markdown(f"📝 Here's a journal you might find supportive: [*{resource['File Name']}*]({resource['Drive Link']})", unsafe_allow_html=True)
     else:
         st.info("No matching resource found — but more are coming soon!")
