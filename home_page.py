@@ -1,14 +1,14 @@
 import streamlit as st
 
-# Set page config first!
+# This must be OUTSIDE any function — very top after imports
 st.set_page_config(
     page_title="Living Diary",
     layout="centered",
     initial_sidebar_state="auto"
 )
 
+# Now your page function
 def show_home_page():
-    # Center and resize logo
     st.markdown(
         """
         <div style="text-align: center;">
