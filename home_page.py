@@ -11,8 +11,8 @@ st.set_page_config(
 st.sidebar.empty()
 
 def show_home_page():
-    # Radio buttons for navigation at the top
-    page = st.radio("Navigate", ["Home", "Gratitude Journal"], key="nav")
+    # Set the default page to "Home"
+    page = st.radio("", ["Home", "Gratitude Journal"], index=0, key="nav")  # Default to "Home" without label
 
     # Centered logo
     st.markdown(
