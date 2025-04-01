@@ -36,14 +36,18 @@ with col5:
 with col6:
     talk_button = st.button("Talk", use_container_width=True)
 
+# Default page set to "Home" if no other button is clicked
+if not home_button and not gratitude_button and not profile_button and not resources_button and not settings_button and not talk_button:
+    home_button = True  # Automatically show the Home page if no other button is pressed
+
 # Display the content based on which button is pressed
 if home_button:
-    show_home_page()
+    show_home_page()  # Show Home page
 elif gratitude_button:
-    show_gratitude_journal()
+    show_gratitude_journal()  # Show Gratitude Journal page
 elif profile_button:
-    show_profile_page()  # Show profile page
+    show_profile_page()  # Show Profile page
 elif resources_button:
-    show_resources_page()  # Show resources page
+    show_resources_page()  # Show Resources page
 elif settings_button:
-    show_settings_page()  # Show settings page
+    show_settings_page()  # Show Settings page
