@@ -9,14 +9,20 @@ st.set_page_config(
     initial_sidebar_state="collapsed"  # Collapse sidebar by default
 )
 
-# Remove the sidebar completely to make navigation clearer
+# Remove the sidebar completely
 st.sidebar.empty()
 
-# Main navigation - Using radio buttons for easy page switching
-page = st.radio("Navigate", ["Home", "Gratitude Journal"])
+# Main navigation buttons (displayed next to each other)
+col1, col2 = st.columns(2)
 
-# Display the content based on the radio button selection
-if page == "Home":
+with col1:
+    home_button = st.button("Home")
+
+with col2:
+    gratitude_button = st.button("Gratitude Journal")
+
+# Display the content based on which button is pressed
+if home_button:
     show_home_page()
-elif page == "Gratitude Journal":
+elif gratitude_button:
     show_gratitude_journal()
