@@ -12,6 +12,7 @@ st.set_page_config(
 # Main navigation buttons (displayed next to each other)
 col1, col2, col3, col4 = st.columns(4)
 
+# Adjust button placement for each column
 with col1:
     home_button = st.button("Home")
 
@@ -24,9 +25,21 @@ with col3:
 with col4:
     resources_button = st.button("Resources")
 
-# Additional button for Settings and Talk functionality
-settings_button = st.button("Settings")
-talk_button = st.button("Talk")
+# Ensure buttons are stacked in mobile view
+st.markdown(
+    """
+    <style>
+    @media screen and (max-width: 800px) {
+        .stButton > button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Default page set to "Home"
 if not home_button and not gratitude_button:
@@ -37,18 +50,3 @@ if home_button:
     show_home_page()
 elif gratitude_button:
     show_gratitude_journal()
-
-# Future functions for new buttons
-if profile_button:
-    st.write("Profile content goes here")
-
-if resources_button:
-    st.write("Resources content goes here")
-
-if settings_button:
-    st.write("Settings content goes here")
-
-if talk_button:
-    # Logic to trigger the GPT conversation
-    st.write("Starting conversation with GPT...")
-    # (You would link your GPT functionality here)
