@@ -47,6 +47,7 @@ if st.button("💜 Save Entry"):
 # Resource matching from keywords
 if user_entry:
     df = pd.read_csv("Enhanced_Living_Diary_Index.csv")
+
     user_words = set(re.findall(r'\w+', user_entry.lower()))
 
     def score_row(row):
@@ -59,15 +60,7 @@ if user_entry:
     if not top_match.empty:
         resource = top_match.iloc[0]
         st.markdown("### Based on how you're feeling, this might help:")
-        st.image(resource['Drive Link'], width=300)
-        st.markdown(f"**{resource['Quote']}**")
-        st.markdown(f"[Download Resource PDF]({resource['PDF_Link']})", unsafe_allow_html=True)
+        st.markdown(f"**{resource.get('Quote', 'Here’s something gentle to explore.')}**")
+        st.markdown(f"[Download Resource PDF]({resource['Drive Link']})", unsafe_allow_html=True)
     else:
         st.info("No matching resource found — but more are coming soon!")
-
-# Display previous entries
-if st.session_state.entries:
-    st.markdown("### 🕰️ Previous Entries")
-    for i, e in enumerate(reversed(st.session_state.entries)):
-        st.markdown(f"**Mood:** {e['mood']}  \n🟪 _{e['text']}_")
-        st.markdown("---")
