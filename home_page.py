@@ -1,12 +1,20 @@
 import streamlit as st
 
-# Set page config FIRST before any other Streamlit command
-
 def show_home_page():
-    # Show your logo (adjust path or width if needed)
-    st.image("FullLogo_Transparent_NoBuffer.png", width=250)
+    st.set_page_config(page_title="Living Diary", layout="centered", initial_sidebar_state="auto")
 
-    st.markdown("🌈 Here's a gentle journaling prompt for you:")
+    # Center and resize logo
+    st.markdown(
+        """
+        <div style="text-align: center;">
+            <img src="https://raw.githubusercontent.com/jchrispin73/living-diary/main/FullLogo_Transparent_NoBuffer.png" width="200">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.markdown("### 🌈 Here's a gentle journaling prompt for you:")
+    # ... rest of your Home UI ...
     prompt = st.selectbox("Pick a prompt", [
         "If my heart could speak, what would it say?",
         "Right now, I am feeling...",
