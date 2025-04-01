@@ -21,6 +21,10 @@ with col1:
 with col2:
     gratitude_button = st.button("Gratitude Journal")
 
+# Default page set to "Home"
+if not home_button and not gratitude_button:
+    home_button = True  # Set "Home" as default if no button is pressed yet
+
 # Display the content based on which button is pressed
 if home_button:
     show_home_page()
