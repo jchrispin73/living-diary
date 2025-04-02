@@ -42,7 +42,7 @@ def show_home_page():
     with col7:
         st.image("FullLogo_Transparent_NoBuffer.png", width=180)  # Logo
     with col8:
-        st.image("living diary soft place to land transparent.png", width=250)  # Leaf Design
+        st.image("living diary soft place to land transparent.png", width=400)  # Leaf Design
 
     # Text below the images
     st.markdown("### Living Diary")
