@@ -14,7 +14,7 @@ local_css("style.css")
 
 # Load logo
 logo = "FullLogo_Transparent_NoBuffer.png"
-st.image(logo, width=250)
+st.image(logo, width=180)  # Adjusted logo size to 180px
 
 # Prompts for journaling
 prompts = [
