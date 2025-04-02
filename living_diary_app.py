@@ -5,18 +5,58 @@ import re
 # Set page config
 st.set_page_config(page_title="Living Diary", layout="centered")
 
-# Apply custom CSS
+# Apply custom CSS (keep the layout and style as per requirements)
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 local_css("style.css")
 
-# Load logo
+# Set up the logo (adjusted size to be smaller and centered)
 logo = "FullLogo_Transparent_NoBuffer.png"
-st.image(logo, width=180)  # Adjusted logo size to 180px
+st.image(logo, width=180)  # Logo size is set to 180px and centered by default
 
-# Prompts for journaling
+# Create columns for the buttons (these are positioned at the top)
+col1, col2, col3 = st.columns([1, 1, 1])  # Equal-width columns for buttons
+
+with col1:
+    home_button = st.button("Home", use_container_width=True)
+
+with col2:
+    gratitude_button = st.button("Gratitude Journal", use_container_width=True)
+
+with col3:
+    profile_button = st.button("Profile", use_container_width=True)
+
+# Add second row for additional buttons (Settings, Talk, Resources)
+col4, col5, col6 = st.columns([1, 1, 1])
+
+with col4:
+    resources_button = st.button("Resources", use_container_width=True)
+
+with col5:
+    settings_button = st.button("Settings", use_container_width=True)
+
+with col6:
+    talk_button = st.button("Talk", use_container_width=True)
+
+# Ensure that home page is displayed if no other button is clicked
+if not home_button and not gratitude_button and not profile_button and not resources_button and not settings_button and not talk_button:
+    home_button = True  # Automatically show the Home page if no other button is pressed
+
+# Display the content based on which button is pressed
+if home_button:
+    show_home_page()  # Show Home page
+elif gratitude_button:
+    show_gratitude_journal()  # Show Gratitude Journal page
+elif profile_button:
+    show_profile_page()  # Show Profile page
+elif resources_button:
+    show_resources_page()  # Show Resources page
+elif settings_button:
+    show_settings_page()  # Show Settings page
+
+# Journaling Prompt Section: User selects prompt, mood, and writes reflection
 prompts = [
     "If my heart could speak, what would it say?",
     "Right now, I am feeling...",
@@ -27,13 +67,11 @@ prompts = [
 
 selected_prompt = st.selectbox("🌈 Here's a gentle journaling prompt for you:", prompts)
 
-# Mood selector
 mood = st.selectbox("Pick a mood to help match your reflection to a resource:", [
     "💤 Tired", "🌧️ Sad", "🌪️ Overwhelmed", "😌 Calm", "💖 Loved", "💔 Heartbroken",
     "🔥 Angry", "🧘 Grounded", "🌀 Anxious", "🌟 Inspired", "🙃 Confused", "🌈 Hopeful"
 ])
 
-# User entry text area
 user_entry = st.text_area("You can type below if you'd like to reflect:", placeholder="Start writing here...")
 
 # Save entries using session state
