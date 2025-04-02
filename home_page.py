@@ -49,9 +49,9 @@ def show_home_page():
         st.image("living diary soft place to land transparent.png", width=400)  # Leaf Design
 
     # Load the CSV for images and quotes
-        df = pd.read_csv("Enhanced_Quote_Images_Living_Diary_new.csv")
-        st.write("CSV column names:", df.columns.tolist())
-st.write("First few rows:", df.head())
+df = pd.read_csv("Enhanced_Quote_Images_Living_Diary_new.csv")
+df.columns = df.columns.str.strip().str.lower()
+df["mood"] = df["mood"].astype(str).str.strip().str.lower()
 
     df.columns = df.columns.str.strip().str.lower()  # Clean column headers
     df["mood"] = df["mood"].astype(str).str.strip().str.lower()  # Clean values too
