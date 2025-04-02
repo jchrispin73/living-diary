@@ -71,26 +71,6 @@ def show_home_page():
     else:
         st.info("Start by journaling to see your daily quote and reflection image.")
 
-    # Choose a random row for the quote and image
-    # Check if a mood was previously selected
-    if "selected_mood" in st.session_state:
-        mood = st.session_state["selected_mood"].lower()
-        filtered = df[df["mood"].str.lower() == mood]
-
-        if not filtered.empty:
-            selected_row = filtered.sample(n=1).iloc[0]
-            quote_text = selected_row['Quote']
-            author = selected_row['Author']
-            image_url = selected_row['image link']  # Correct lowercase column
-
-            st.markdown(f"### “{quote_text}”")
-            st.markdown(f"**— {author}**")
-            st.image(image_url, caption="Image for reflection", use_column_width=True)
-        else:
-            st.info("No matching quote found for your mood. Try journaling again.")
-    else:
-        st.info("Start by journaling to see your daily quote and reflection image.")
-
   # Display the image
 
 # Track which page is currently active
