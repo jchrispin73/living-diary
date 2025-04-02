@@ -40,7 +40,7 @@ with col6:
 st.markdown(
     """
     <div style="text-align: center;">
-        <img src="FullLogo_Transparent_NoBuffer.png" style="width: 180px; height: auto; margin: 0 auto;">
+        <img src="images/FullLogo_Transparent_NoBuffer.png" style="width: 180px; height: auto; margin: 0 auto;">
     </div>
     """, unsafe_allow_html=True
 )
