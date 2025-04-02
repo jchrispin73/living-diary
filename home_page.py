@@ -50,63 +50,29 @@ def show_home_page():
 
     # Load the CSV for images and quotes
 df = pd.read_csv("Enhanced_Quote_Images_Living_Diary_new.csv")
-df.columns = df.columns.str.strip().str.lower()
-df["mood"] = df["mood"].astype(str).str.strip().str.lower()
+df.columns = df.columns.str.strip().str.lower()  # Clean headers
+df["mood"] = df["mood"].astype(str).str.strip().str.lower()  # Clean values
 
-    df.columns = df.columns.str.strip().str.lower()  # Clean column headers
-    df["mood"] = df["mood"].astype(str).str.strip().str.lower()  # Clean values too
+st.write("CSV column names:", df.columns.tolist())
+st.write("First few rows:", df.head())
 
-    if "selected_mood" in st.session_state:
-        mood = st.session_state["selected_mood"].strip().lower()
-        st.write("User-selected mood:", mood)
-st.write("Available moods in CSV:", df["mood"].unique().tolist())
-filtered = df[df["mood"] == mood]
+if "selected_mood" in st.session_state:
+    mood = st.session_state["selected_mood"].strip().lower()
+    st.write("User-selected mood:", mood)
+    st.write("Available moods in CSV:", df["mood"].unique().tolist())
 
-        if not filtered.empty:
-            selected_row = filtered.sample(n=1).iloc[0]
-            quote_text = selected_row["quote"]
-            author = selected_row["author"]
-            image_url = selected_row["image link"]
+    filtered = df[df["mood"] == mood]
 
-            st.markdown(f"### “{quote_text}”")
-            st.markdown(f"**— {author}**")
-            st.image(image_url, caption="Image for reflection", use_column_width=True)
-        else:
-            st.info("No matching quote found for your mood. Try journaling again.")
+    if not filtered.empty:
+        selected_row = filtered.sample(n=1).iloc[0]
+        quote_text = selected_row["quote"]
+        author = selected_row["author"]
+        image_url = selected_row["image link"]
+
+        st.markdown(f"### “{quote_text}”")
+        st.markdown(f"**— {author}**")
+        st.image(image_url, caption="Image for reflection", use_column_width=True)
     else:
-        st.info("Start by journaling to see your daily quote and reflection image.")
-
-  # Display the image
-
-# Track which page is currently active
-if "current_page" not in st.session_state:
-    st.session_state["current_page"] = "Home"
-
-# Update page based on button clicks
-if home_button:
-    st.session_state["current_page"] = "Home"
-elif gratitude_button:
-    st.session_state["current_page"] = "Gratitude"
-elif profile_button:
-    st.session_state["current_page"] = "Profile"
-elif resources_button:
-    st.session_state["current_page"] = "Resources"
-elif settings_button:
-    st.session_state["current_page"] = "Settings"
-elif talk_button:
-    st.session_state["current_page"] = "Talk"
-
-# Show the correct page
-if st.session_state["current_page"] == "Home":
-    show_home_page()
-elif st.session_state["current_page"] == "Gratitude":
-    show_gratitude_journal()
-elif st.session_state["current_page"] == "Profile":
-    show_profile_page()
-elif st.session_state["current_page"] == "Resources":
-    show_resources_page()
-elif st.session_state["current_page"] == "Settings":
-    show_settings_page()
-elif st.session_state["current_page"] == "Talk":
-    st.markdown("**Talk feature coming soon.**")
-
+        st.info("No matching quote found for your mood. Try journaling again.")
+else:
+    st.info("Start by journaling to see your daily quote and reflection image.")
