@@ -62,7 +62,7 @@ if home_button:
     show_home_page()  # Show Home page
 elif gratitude_button:
     show_gratitude_journal()  # Show Gratitude Journal page
-    
+
     # After gratitude journal submission, show the matching resource
     if 'mood' in st.session_state and st.session_state['mood']:
         mood = st.session_state['mood']  # Get the mood selected
