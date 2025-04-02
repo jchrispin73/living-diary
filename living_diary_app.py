@@ -35,9 +35,14 @@ with col5:
 
 with col6:
     talk_button = st.button("Talk", use_container_width=True)
-
 # Logo centered below buttons
-st.markdown("<h1 style='text-align: center;'> <img src='FullLogo_Transparent_NoBuffer.png' style='width: 180px; margin: 0 auto; display: block;'> </h1>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div style="text-align: center;">
+        <img src="FullLogo_Transparent_NoBuffer.png" style="width: 180px; height: auto; margin: 0 auto;">
+    </div>
+    """, unsafe_allow_html=True
+)
 
 # Default page set to "Home" if no other button is clicked
 if not home_button and not gratitude_button and not profile_button and not resources_button and not settings_button and not talk_button:
