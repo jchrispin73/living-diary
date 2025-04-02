@@ -49,7 +49,27 @@ def show_home_page():
         st.image("living diary soft place to land transparent.png", width=400)  # Leaf Design
 
     # Load the CSV for images and quotes
-    df = pd.read_csv("Enhanced_Quote_Images_Living_Diary_new.csv")
+        df = pd.read_csv("Enhanced_Quote_Images_Living_Diary_new.csv")
+    df.columns = df.columns.str.strip().str.lower()  # Clean column headers
+    df["mood"] = df["mood"].astype(str).str.strip().str.lower()  # Clean values too
+
+    if "selected_mood" in st.session_state:
+        mood = st.session_state["selected_mood"].strip().lower()
+        filtered = df[df["mood"] == mood]
+
+        if not filtered.empty:
+            selected_row = filtered.sample(n=1).iloc[0]
+            quote_text = selected_row["quote"]
+            author = selected_row["author"]
+            image_url = selected_row["image link"]
+
+            st.markdown(f"### “{quote_text}”")
+            st.markdown(f"**— {author}**")
+            st.image(image_url, caption="Image for reflection", use_column_width=True)
+        else:
+            st.info("No matching quote found for your mood. Try journaling again.")
+    else:
+        st.info("Start by journaling to see your daily quote and reflection image.")
 
     # Choose a random row for the quote and image
     # Check if a mood was previously selected
