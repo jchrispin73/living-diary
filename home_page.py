@@ -1,41 +1,42 @@
 import streamlit as st
+from gratitude_journal import show_gratitude_journal
+from profile_page import show_profile_page
+from resources_page import show_resources_page
+from settings_page import show_settings_page
 
-def show_home_page():
-    # Page layout
-    st.set_page_config(page_title="Living Diary", layout="centered", initial_sidebar_state="collapsed")
-    
-    # Create columns for the page structure
-    col1, col2 = st.columns([1, 1])
+# Define the layout and buttons
+st.set_page_config(page_title="Living Diary", layout="centered")
 
-    with col1:
-        # Logo and Leaf Image side by side
-        st.image("images/Living_Diary_logo.png", width=180)  # Replace with actual path to the logo
-    with col2:
-        # Leaf image (adjust the path and size)
-        st.image("images/living_diary_soft_place_to_land_transparent.png", width=250)  # Adjust as needed
+# Button layout for top navigation
+col1, col2, col3 = st.columns([1, 1, 1]) 
+with col1:
+    home_button = st.button("Home", use_container_width=True)
+with col2:
+    gratitude_button = st.button("Gratitude Journal", use_container_width=True)
+with col3:
+    profile_button = st.button("Profile", use_container_width=True)
 
-    # Title and description
-    st.markdown("### Living Diary")
-    st.markdown("A soft place to land when you're feeling emotionally full or need support.")
-    
-    # Daily quote and image section (static placeholder for now)
-    st.markdown("**daily quote here**")  # You will replace this with dynamic content later
-    st.image("images/reflective_image_placeholder.png", caption="reflective image", width=400)  # Placeholder image
+# Add second row for next set of buttons
+col4, col5, col6 = st.columns([1, 1, 1]) 
+with col4:
+    resources_button = st.button("Resources", use_container_width=True)
+with col5:
+    settings_button = st.button("Settings", use_container_width=True)
+with col6:
+    talk_button = st.button("Talk", use_container_width=True)
 
-    # Buttons for navigation (as per the design)
-    col3, col4, col5 = st.columns([1, 1, 1])
-    
-    with col3:
-        if st.button("Gratitude Journal"):
-            # Functionality for Gratitude Journal
-            st.write("Gratitude Journal clicked!")  # Replace with actual function or navigation
-    
-    with col4:
-        if st.button("Talk"):
-            # Functionality for Talk
-            st.write("Talk clicked!")  # Replace with actual function or navigation
-    
-    with col5:
-        if st.button("Resources"):
-            # Functionality for Resources
-            st.write("Resources clicked!")  # Replace with actual function or navigation
+# Page flow based on the button clicked
+if home_button:
+    show_home_page()  # Show the home page content
+elif gratitude_button:
+    show_gratitude_journal()  # Show Gratitude Journal page
+elif profile_button:
+    show_profile_page()  # Show Profile page
+elif resources_button:
+    show_resources_page()  # Show Resources page
+elif settings_button:
+    show_settings_page()  # Show Settings page
+
+# Show a placeholder content for home page if no button is pressed
+if not home_button and not gratitude_button and not profile_button and not resources_button and not settings_button and not talk_button:
+    show_home_page()  # Default to home page if no other button is clicked
