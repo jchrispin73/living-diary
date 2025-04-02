@@ -1,23 +1,24 @@
+import pandas as pd
 import streamlit as st
 
 def show_home_page():
     # Add top navigation buttons
     col1, col2, col3 = st.columns([1, 1, 1])  # Adjust proportions for responsiveness
     with col1:
-        home_button = st.button("Home", use_container_width=True)
+        home_button = st.button("Home", use_container_width=True, key="home_button")
     with col2:
-        gratitude_button = st.button("Gratitude Journal", use_container_width=True)
+        gratitude_button = st.button("Gratitude Journal", use_container_width=True, key="gratitude_button")
     with col3:
-        profile_button = st.button("Profile", use_container_width=True)
+        profile_button = st.button("Profile", use_container_width=True, key="profile_button")
 
     # Second row for other buttons (Resources, Settings, Talk)
     col4, col5, col6 = st.columns([1, 1, 1])  # Adjust proportions for responsiveness
     with col4:
-        resources_button = st.button("Resources", use_container_width=True)
+        resources_button = st.button("Resources", use_container_width=True, key="resources_button")
     with col5:
-        settings_button = st.button("Settings", use_container_width=True)
+        settings_button = st.button("Settings", use_container_width=True, key="settings_button")
     with col6:
-        talk_button = st.button("Talk", use_container_width=True)
+        talk_button = st.button("Talk", use_container_width=True, key="talk_button")
 
     # Add logo and leaf side by side with a small gap
     col7, col8 = st.columns([1, 0.2, 1])  # Adjust for logo and leaf alignment
@@ -33,7 +34,7 @@ def show_home_page():
         st.markdown(
             """
             <div style="text-align: center;">
-                <img src="https://raw.githubusercontent.com/jchrispin73/living-diary/main/leaf_image.png" width="50">
+                <img src="https://raw.githubusercontent.com/jchrispin73/living-diary/main/living%20diary%20soft%20place%20to%20land%20transparent.png" width="50">
             </div>
             """, unsafe_allow_html=True
         )
@@ -41,7 +42,7 @@ def show_home_page():
     # Add the quote section below the logo
     st.markdown("### Living Diary")
     st.markdown("A soft place to land when you're feeling emotionally full or need support.")
-    st.markdown("**daily quote here**")
+    st.markdown("**daily quote here**")  # Placeholder for daily quote
 
     # Add the reflective image placeholder below the quote
     st.markdown("### Reflective Image")
@@ -49,20 +50,14 @@ def show_home_page():
 
     # Optionally handle other logic for when buttons are clicked
     if home_button:
-        # Show Home content or redirect here
-        pass
+        pass  # Logic for home page
     if gratitude_button:
-        # Show Gratitude Journal content
-        pass
+        pass  # Logic for gratitude journal
     if profile_button:
-        # Show Profile content
-        pass
+        pass  # Logic for profile page
     if resources_button:
-        # Show Resources content
-        pass
+        pass  # Logic for resources
     if settings_button:
-        # Show Settings content
-        pass
+        pass  # Logic for settings page
     if talk_button:
-        # Show Talk content
-        pass
+        pass  # Logic for talk feature
