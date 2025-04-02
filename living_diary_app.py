@@ -36,7 +36,6 @@ with col5:
 with col6:
     talk_button = st.button("Talk", use_container_width=True)
 # Logo centered below buttons
-# Logo centered below buttons
 st.markdown(
     """
     <div style="text-align: center;">
