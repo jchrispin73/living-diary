@@ -52,13 +52,24 @@ def show_home_page():
     df = pd.read_csv("Enhanced_Quote_Images_Living_Diary new.csv")
 
     # Choose a random row for the quote and image
-    random_quote = df.sample(n=1).iloc[0]
-    quote_text = random_quote['Quote']
-    image_url = random_quote['Image Link']
+    if "selected_mood" in st.session_state:
+    mood = st.session_state["selected_mood"].lower()
+    filtered = df[df["mood"].str.lower() == mood]
 
-    # Display the quote and image
-    st.markdown(f"**{quote_text}**")  # Display the quote
-    st.image(image_url, caption="Image for reflection", width=300)  # Display the image
+    if not filtered.empty:
+        selected_row = filtered.sample(n=1).iloc[0]
+        quote_text = selected_row['Quote']
+        author = selected_row['Author']
+        image_url = selected_row['image link']  # <-- correct lowercase column
+
+        st.markdown(f"### “{quote_text}”")
+        st.markdown(f"**— {author}**")
+        st.image(image_url, caption="Image for reflection", use_column_width=True)
+    else:
+        st.info("No matching quote found for your mood. Try journaling again.")
+else:
+    st.info("Start by journaling to see your daily quote and reflection image.")
+  # Display the image
 
 # Page flow based on the button clicked
 if home_button:
