@@ -1,90 +1,70 @@
 import streamlit as st
 import pandas as pd
-from home_page import show_home_page
-from gratitude_journal import show_gratitude_journal
-from profile_page import show_profile_page  # Imported profile page
-from resources_page import show_resources_page  # Imported resources page
-from settings_page import show_settings_page  # Imported settings page
+import re
 
-# Must be the very first Streamlit command
-st.set_page_config(
-    page_title="Living Diary",
-    layout="centered",  # Ensure content is centered
-    initial_sidebar_state="collapsed"  # Collapse sidebar by default
-)
+# Set page config
+st.set_page_config(page_title="Living Diary", layout="centered")
 
-# Load the CSV file that contains the quotes and images
-quotes_df = pd.read_csv('Enhanced_Quote_Images_Living_Diary new.csv')
+# Apply custom CSS
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# Function to get the quote and image for the selected mood
-def get_mood_resource(mood):
-    # Filter the CSV based on the selected mood
-    filtered = quotes_df[quotes_df['mood'] == mood]
+local_css("style.css")
 
-    if not filtered.empty:
-        # Randomly select a quote and image based on the mood
-        selected_resource = filtered.sample(1).iloc[0]
-        quote = selected_resource['quote']
-        image_path = selected_resource['image_path']
-        return quote, image_path
-    return None, None
+# Load logo
+logo = "FullLogo_Transparent_NoBuffer.png"
+st.image(logo, width=250)
 
-# Use st.columns to manage layout
-col1, col2, col3 = st.columns([1, 1, 1])  # Adjust proportions for responsiveness
+# Prompts for journaling
+prompts = [
+    "If my heart could speak, what would it say?",
+    "Right now, I am feeling...",
+    "What’s one small step I could take to be kind to myself today?",
+    "What emotion keeps showing up lately?",
+    "How does my inner child feel today?"
+]
 
-with col1:
-    home_button = st.button("Home", use_container_width=True)
+selected_prompt = st.selectbox("🌈 Here's a gentle journaling prompt for you:", prompts)
 
-with col2:
-    gratitude_button = st.button("Gratitude Journal", use_container_width=True)
+# Mood selector
+mood = st.selectbox("Pick a mood to help match your reflection to a resource:", [
+    "💤 Tired", "🌧️ Sad", "🌪️ Overwhelmed", "😌 Calm", "💖 Loved", "💔 Heartbroken",
+    "🔥 Angry", "🧘 Grounded", "🌀 Anxious", "🌟 Inspired", "🙃 Confused", "🌈 Hopeful"
+])
 
-with col3:
-    profile_button = st.button("Profile", use_container_width=True)
+# User entry text area
+user_entry = st.text_area("You can type below if you'd like to reflect:", placeholder="Start writing here...")
 
-# Add second row for the next set of buttons (Settings, Talk, Resources)
-col4, col5, col6 = st.columns([1, 1, 1])  # Adjust proportions for responsiveness
+# Save entries using session state
+if "entries" not in st.session_state:
+    st.session_state.entries = []
 
-with col4:
-    resources_button = st.button("Resources", use_container_width=True)
+if st.button("💜 Save Entry"):
+    st.session_state.entries.append({"mood": mood, "text": user_entry})
+    st.success("💖 Entry saved. You can return to it in 'Previous Entries' later.")
 
-with col5:
-    settings_button = st.button("Settings", use_container_width=True)
+# Resource matching from keywords
+if user_entry:
+    try:
+        df = pd.read_csv("Enhanced_Living_Diary_Index_UPDATED.csv")
+    except FileNotFoundError:
+        st.error("🚫 The file 'Enhanced_Living_Diary_Index_UPDATED.csv' was not found. Make sure it's uploaded and named correctly.")
+        st.stop()
 
-with col6:
-    talk_button = st.button("Talk", use_container_width=True)
+    user_words = set(re.findall(r'\w+', user_entry.lower()))
 
-# Default page set to "Home" if no other button is clicked
-if not home_button and not gratitude_button and not profile_button and not resources_button and not settings_button and not talk_button:
-    home_button = True  # Automatically show the Home page if no other button is pressed
+    def score_row(row):
+        keywords = str(row['Keywords']).lower().split(',')
+        return len(set(map(str.strip, keywords)) & user_words)
 
-# Display the content based on which button is pressed
-if home_button:
-    show_home_page()  # Show Home page
-elif gratitude_button:
-    show_gratitude_journal()  # Show Gratitude Journal page
+    df['score'] = df.apply(score_row, axis=1)
+    top_match = df[df['score'] > 0].sort_values(by='score', ascending=False).head(1)
 
-    # After gratitude journal submission, show the matching resource
-    if 'mood' in st.session_state and st.session_state['mood']:
-        mood = st.session_state['mood']  # Get the mood selected
-        quote, image_path = get_mood_resource(mood)
-        
-        if quote and image_path:
-            # Show the quote and image right after journaling
-            st.image(image_path, use_column_width=True)
-            st.write(f"**Quote of the Day**: {quote}")
-            
-            # Save the entry to the Resources page (Store in session state)
-            if 'resources' not in st.session_state:
-                st.session_state.resources = []
-            st.session_state.resources.append({'quote': quote, 'image': image_path})
-            
-            # Automatically navigate to Resources page after saving
-            show_resources_page()
-        else:
-            st.write("No resource found for this mood.")
-elif profile_button:
-    show_profile_page()  # Show Profile page
-elif resources_button:
-    show_resources_page()  # Show Resources page
-elif settings_button:
-    show_settings_page()  # Show Settings page
+    if not top_match.empty:
+        resource = top_match.iloc[0]
+        st.markdown("### Based on how you're feeling, this might help:")
+        st.markdown(f"**{resource.get('Quote', 'Here’s something gentle to explore.')}**")
+        st.markdown(f"📝 Here's a journal you might find supportive: [*{resource['File Name']}*]({resource['Drive Link']})", unsafe_allow_html=True)
+    else:
+        st.info("No matching resource found — but more are coming soon!")
