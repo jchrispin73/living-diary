@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 from home_page import show_home_page
 from gratitude_journal import show_gratitude_journal
 from profile_page import show_profile_page  # Imported profile page
@@ -11,6 +12,20 @@ st.set_page_config(
     layout="centered",  # Ensure content is centered
     initial_sidebar_state="collapsed"  # Collapse sidebar by default
 )
+
+# Load the CSV file that contains the quotes and images
+quotes_df = pd.read_csv('Enhanced_Quote_Images_Living_Diary new.csv')
+
+# Function to get the quote and image for the selected mood
+def get_mood_resource(mood):
+    filtered = quotes_df[quotes_df['mood'] == mood]
+    if not filtered.empty:
+        # Randomly select a quote and image based on the mood
+        selected_resource = filtered.sample(1).iloc[0]
+        quote = selected_resource['quote']
+        image_path = selected_resource['image_path']
+        return quote, image_path
+    return None, None
 
 # Use st.columns to manage layout
 col1, col2, col3 = st.columns([1, 1, 1])  # Adjust proportions for responsiveness
@@ -45,9 +60,17 @@ if home_button:
     show_home_page()  # Show Home page
 elif gratitude_button:
     show_gratitude_journal()  # Show Gratitude Journal page
+    # After gratitude journal submission, show the matching resource
+    mood = st.session_state.get('mood', None)
+    if mood:
+        quote, image_path = get_mood_resource(mood)
+        if quote and image_path:
+            st.image(image_path)
+            st.write(quote)
 elif profile_button:
     show_profile_page()  # Show Profile page
 elif resources_button:
     show_resources_page()  # Show Resources page
 elif settings_button:
     show_settings_page()  # Show Settings page
+
