@@ -35,11 +35,32 @@ def show_home_page():
     # Text input for reflection
     journal = st.text_area("You can type below if you'd like to reflect:")
 
-    # Save entry button
-    save_button = st.button("Save Entry", use_container_width=True)
+    if st.button("💜 Save Entry"):
+    st.session_state.entries.append({"mood": mood, "text": user_entry})
+    st.success("💖 Entry saved. You can return to it in 'Previous Entries' later.")
 
-    # Action when the save button is clicked
-    if save_button:
-        # Logic to save the journal entry
-        st.success("Entry saved! You can return to it later.")
+# Resource matching from keywords
+if user_entry:
+    try:
+        df = pd.read_csv("Enhanced_Living_Diary_Index_UPDATED.csv")
+    except FileNotFoundError:
+        st.error("🚫 The file 'Enhanced_Living_Diary_Index_UPDATED.csv' was not found. Make sure it's uploaded and named correctly.")
+        st.stop()
 
+    user_words = set(re.findall(r'\w+', user_entry.lower()))
+
+    def score_row(row):
+        keywords = str(row['Keywords']).lower().split(',')
+        return len(set(map(str.strip, keywords)) & user_words)
+
+    df['score'] = df.apply(score_row, axis=1)
+    top_match = df[df['score'] > 0].sort_values(by='score', ascending=False).head(1)
+
+    if not top_match.empty:
+        resource = top_match.iloc[0]
+        st.markdown("### Based on how you're feeling, this might help:")
+        st.markdown(f"**{resource.get('Quote', 'Here’s something gentle to explore.')}**")
+        st.markdown(f"📝 Here's a journal you might find supportive: [*{resource['File Name']}*]({resource['Drive Link']})", unsafe_allow_html=True)
+    else:
+        st.info("No matching resource found — but more are coming soon!")
+ 
