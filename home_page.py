@@ -42,7 +42,7 @@ def show_home_page():
     with col7:
         st.image("FullLogo_Transparent_NoBuffer.png", width=180)  # Logo
     with col8:
-        st.image("living diary soft place to land transparent.png", width=400)  # Leaf Design
+        st.image("living diary soft place to land transparent.png", width=200)  # Leaf Design
 
     # Display daily quote (you can integrate your quote logic here)
     st.markdown("**daily quote here**")
