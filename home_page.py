@@ -49,7 +49,7 @@ def show_home_page():
         st.image("living diary soft place to land transparent.png", width=400)  # Leaf Design
 
     # Load the CSV for images and quotes
-    df = pd.read_csv("Enhanced_Quote_Images_Living_Diary new.csv")
+    df = pd.read_csv("Enhanced_Quote_Images_Living_Diary_new.csv")
 
     # Choose a random row for the quote and image
     # Check if a mood was previously selected
