@@ -1,4 +1,8 @@
 import streamlit as st
+import pandas as pd
+import random
+
+# Import other pages
 from gratitude_journal import show_gratitude_journal
 from profile_page import show_profile_page
 from resources_page import show_resources_page
@@ -44,11 +48,17 @@ def show_home_page():
     with col8:
         st.image("living diary soft place to land transparent.png", width=400)  # Leaf Design
 
-    # Display daily quote (you can integrate your quote logic here)
-    st.markdown("**daily quote here**")
+    # Load the CSV for images and quotes
+    df = pd.read_csv("Enhanced_Quote_Images_Living_Diary new.csv")
 
-    # Placeholder for reflective image
-    st.image("reflective_image_placeholder.png", caption="reflective image", width=300)
+    # Choose a random row for the quote and image
+    random_quote = df.sample(n=1).iloc[0]
+    quote_text = random_quote['Quote']
+    image_url = random_quote['Image Link']
+
+    # Display the quote and image
+    st.markdown(f"**{quote_text}**")  # Display the quote
+    st.image(image_url, caption="Image for reflection", width=300)  # Display the image
 
 # Page flow based on the button clicked
 if home_button:
