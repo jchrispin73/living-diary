@@ -64,18 +64,22 @@ elif gratitude_button:
     show_gratitude_journal()  # Show Gratitude Journal page
     
     # After gratitude journal submission, show the matching resource
-    mood = st.session_state.get('mood', None)
-    if mood:
+    if 'mood' in st.session_state and st.session_state['mood']:
+        mood = st.session_state['mood']  # Get the mood selected
         quote, image_path = get_mood_resource(mood)
+        
         if quote and image_path:
             # Show the quote and image right after journaling
             st.image(image_path, use_column_width=True)
             st.write(f"**Quote of the Day**: {quote}")
             
-            # Save the entry to the Resources page
-            st.session_state.resources = st.session_state.get('resources', [])
+            # Save the entry to the Resources page (Store in session state)
+            if 'resources' not in st.session_state:
+                st.session_state.resources = []
             st.session_state.resources.append({'quote': quote, 'image': image_path})
-            show_resources_page()  # Navigate to Resources page
+            
+            # Automatically navigate to Resources page after saving
+            show_resources_page()
         else:
             st.write("No resource found for this mood.")
 elif profile_button:
