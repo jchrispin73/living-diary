@@ -1,37 +1,29 @@
 import streamlit as st
 
 def show_gratitude_journal():
-    st.title("🌸 Gratitude Journal")
+    st.title("Gratitude Journal")
 
-    # Add mood dropdown next to the title
-    mood_options = [
-            "💤 Tired", "🌧️ Sad", "🌪️ Overwhelmed", "😌 Calm", "💖 Loved", "💔 Heartbroken",
-    "🔥 Angry", "🧘 Grounded", "🌀 Anxious", "🌟 Inspired", "🙃 Confused", "🌈 Hopeful"
-    ]
-    mood = st.selectbox("How are you feeling today?", options=mood_options)
+    # Mood selection dropdown
+    mood = st.selectbox("How are you feeling today?", [
+        "😌 Calm", "💤 Tired", "🌧️ Sad", "🌀 Anxious", "🌪️ Overwhelmed",
+        "🔥 Angry", "💔 Heartbroken", "💖 Loved", "🙃 Confused", 
+        "🌈 Hopeful", "🌟 Inspired", "🧘 Grounded"
+    ])
 
-    with st.form("gratitude_form"):
-        st.subheader("Today I'm grateful for:")
-        grateful_1 = st.text_input("Grateful item 1", key="g1")
-        grateful_2 = st.text_input("Grateful item 2", key="g2")
-        grateful_3 = st.text_input("Grateful item 3", key="g3")
+    # Input fields for journaling
+    st.subheader("Today I'm grateful for:")
+    grateful_1 = st.text_input("Grateful item 1")
+    grateful_2 = st.text_input("Grateful item 2")
+    grateful_3 = st.text_input("Grateful item 3")
 
-        st.subheader("Today's affirmation:")
-        affirmation = st.text_area("Type your affirmation", key="a1")
+    st.subheader("Today's affirmation:")
+    affirmation = st.text_area("Type your affirmation")
 
-        st.subheader("Something I’m proud of:")
-        proud = st.text_area("What are you proud of today?", key="p1")
+    st.subheader("Looking forward to:")
+    looking_forward = st.text_area("Something positive you're looking forward to")
 
-        st.subheader("Tomorrow I look forward to:")
-        look_forward = st.text_area("What are you looking forward to?", key="l1")
+    # Submit button (only on click will session_state be updated)
+    if st.button("Submit Journal Entry"):
+        st.session_state["selected_mood"] = mood.strip().lower()  # Save mood in session
+        st.success("Journal entry saved! Go back to the Home page to see your reflection.")
 
-        st.subheader("Notes / Reminders:")
-        notes = st.text_area("Any extra thoughts or reminders?", key="n1")
-
-        st.subheader("Today I am feeling...")
-        feelings = st.text_area("Describe how you're feeling right now", key="f1")
-
-        submitted = st.form_submit_button("Save Journal Entry")
-
-        if submitted:
-            st.success("💖 Entry saved! You can return to it later.")  
