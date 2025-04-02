@@ -36,17 +36,20 @@ with col5:
 with col6:
     talk_button = st.button("Talk", use_container_width=True)
 
-# Display logo and leaf image below buttons
+# Display leaf and logo side by side with larger leaf size
 col7, col8 = st.columns([1, 0.5])  # Adjust width for logo and leaf placement
 
 with col7:
-    st.image("living diary soft place to land transparent.png", width=180)  # Leaf image
+    st.image("living diary soft place to land transparent.png", width=300)  # Larger leaf image
 with col8:
     st.image("FullLogo_Transparent_NoBuffer.png", width=180)  # Logo
 
-# Display quote and reflective image
+# Display quote and reflective image (fixing placeholder issue)
 st.markdown("### daily quote here")  # Placeholder for the daily quote
-st.image("reflective_image_placeholder.png")  # Placeholder for reflective image
+try:
+    st.image("reflective_image_placeholder.png")  # Make sure this image is correctly placed
+except FileNotFoundError:
+    st.error("Reflective image not found.")  # Handling error for missing image
 
 # Default page set to "Home" if no other button is clicked
 if not home_button and not gratitude_button and not profile_button and not resources_button and not settings_button and not talk_button:
