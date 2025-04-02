@@ -1,6 +1,5 @@
 import streamlit as st
 
-# Home page content
 def show_home_page():
     # Add top navigation buttons
     col1, col2, col3 = st.columns([1, 1, 1])  # Adjust proportions for responsiveness
@@ -20,7 +19,7 @@ def show_home_page():
     with col6:
         talk_button = st.button("Talk", use_container_width=True)
 
-    # Add logo and leaf side by side
+    # Add logo and leaf side by side with a small gap
     col7, col8 = st.columns([1, 0.2, 1])  # Adjust for logo and leaf alignment
     with col7:
         st.markdown(
