@@ -22,11 +22,10 @@ def show_gratitude_journal():
     st.subheader("Looking forward to:")
     looking_forward = st.text_area("Something positive you're looking forward to")
 
-    # Submit button (only on click will session_state be updated)
-if st.button("Submit Journal Entry"):
-    # Extract mood after emoji and store lowercase
-    st.session_state["selected_mood"] = mood.split(" ", 1)[-1].strip().lower()
-    st.success("Journal entry saved! Go back to the Home page to see your reflection.")
+    # 🔁 Submit button to save mood
+    submitted = st.button("Submit Journal Entry")
 
-
-
+    if submitted:
+        # Strip emoji and save mood in lowercase
+        st.session_state["selected_mood"] = mood.split(" ", 1)[-1].strip().lower()
+        st.success("Journal entry saved! Go back to the Home page to see your reflection.")
