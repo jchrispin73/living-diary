@@ -25,6 +25,25 @@ with col5:
 with col6:
     talk_button = st.button("Talk", use_container_width=True)
 
+# Function to display home page content
+def show_home_page():
+    # Display the logo and leaf images here
+    col7, col8 = st.columns([1, 0.2])  # Adjust for logo and leaf alignment
+    with col7:
+        st.image("FullLogo_Transparent_NoBuffer.png", width=180)  # Logo
+    with col8:
+        st.image("living diary soft place to land transparent.png", width=250)  # Leaf Design
+
+    # Text below the images
+    st.markdown("### Living Diary")
+    st.markdown("A soft place to land when you're feeling emotionally full or need support.")
+    
+    # Display daily quote (you can integrate your quote logic here)
+    st.markdown("**daily quote here**")
+
+    # Placeholder for reflective image
+    st.image("reflective_image_placeholder.png", caption="reflective image", width=300)
+
 # Page flow based on the button clicked
 if home_button:
     show_home_page()  # Show the home page content
@@ -37,6 +56,7 @@ elif resources_button:
 elif settings_button:
     show_settings_page()  # Show Settings page
 
-# Show a placeholder content for home page if no button is pressed
+# Default to home page if no button is clicked
 if not home_button and not gratitude_button and not profile_button and not resources_button and not settings_button and not talk_button:
-    show_home_page()  # Default to home page if no other button is clicked
+    home_button = True  # Automatically show the Home page if no other button is pressed
+    show_home_page()  # Show Home page
