@@ -1,4 +1,7 @@
 import streamlit as st
+import pandas as pd
+import random
+import datetime
 from home_page import show_home_page
 from gratitude_journal import show_gratitude_journal
 from profile_page import show_profile_page  # Imported profile page
@@ -11,6 +14,38 @@ st.set_page_config(
     layout="centered",  # Ensure content is centered
     initial_sidebar_state="collapsed"  # Collapse sidebar by default
 )
+
+# Path to your CSV file (adjust based on actual file location)
+csv_file_path = 'Enhanced_Quote_Images_Living_Diary new.csv'
+quotes_df = pd.read_csv(csv_file_path)
+
+# Ensure the CSV has the expected columns (mood | quote | image)
+# You can display the dataframe here to ensure it's loaded correctly
+# st.write(quotes_df)
+
+# Get the current date to display a new quote/image daily
+today = datetime.date.today()
+today_str = today.strftime("%Y-%m-%d")
+
+# Check if the current date already exists in session state to ensure the quote is updated daily
+if 'quote_date' not in st.session_state or st.session_state.quote_date != today_str:
+    # Randomly pick a quote/image
+    random_quote = quotes_df.sample(n=1).iloc[0]
+
+    # Save the selected quote and image in session state
+    st.session_state.selected_quote = random_quote['quote']
+    st.session_state.selected_image = random_quote['image']
+    st.session_state.quote_date = today_str
+else:
+    # Use the already saved quote and image from the session state
+    random_quote = {
+        'quote': st.session_state.selected_quote,
+        'image': st.session_state.selected_image
+    }
+
+# Display the quote and image on the main page
+st.image(random_quote['image'], width=300)  # Display image (adjust the width as needed)
+st.write(f"**Quote of the Day:** {random_quote['quote']}")
 
 # Use st.columns to manage layout
 col1, col2, col3 = st.columns([1, 1, 1])  # Adjust proportions for responsiveness
