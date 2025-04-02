@@ -5,12 +5,8 @@ def show_gratitude_journal():
 
     # Add mood dropdown next to the title
     mood_options = [
-        "Anxiety", "Mindfulness", "Healing", "Self-Care", "Self-Worth", 
-        "Emotional Awareness", "Transformation", "Reflection", "Self-Love", 
-        "Strength", "Positivity", "Confidence", "Expression", "Self-Care", 
-        "Healing", "Courage", "Hope", "Empowerment", "Boundaries", "Resilience",
-        "Growth", "Wholeness", "Reassurance", "Burnout Recovery", "Letting Go",
-        "Progress", "Connection", "Joy", "Support", "Survival", "Trust"
+            "💤 Tired", "🌧️ Sad", "🌪️ Overwhelmed", "😌 Calm", "💖 Loved", "💔 Heartbroken",
+    "🔥 Angry", "🧘 Grounded", "🌀 Anxious", "🌟 Inspired", "🙃 Confused", "🌈 Hopeful"
     ]
     mood = st.selectbox("How are you feeling today?", options=mood_options)
 
