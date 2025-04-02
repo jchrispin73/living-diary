@@ -52,7 +52,7 @@ def show_home_page():
     df = pd.read_csv("Enhanced_Quote_Images_Living_Diary new.csv")
 
     # Choose a random row for the quote and image
-    if "selected_mood" in st.session_state:
+   if "selected_mood" in st.session_state:
     mood = st.session_state["selected_mood"].lower()
     filtered = df[df["mood"].str.lower() == mood]
 
