@@ -44,10 +44,6 @@ def show_home_page():
     with col8:
         st.image("living diary soft place to land transparent.png", width=400)  # Leaf Design
 
-    # Text below the images
-    st.markdown("### Living Diary")
-    st.markdown("A soft place to land when you're feeling emotionally full or need support.")
-    
     # Display daily quote (you can integrate your quote logic here)
     st.markdown("**daily quote here**")
 
