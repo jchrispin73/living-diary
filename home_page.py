@@ -1,6 +1,6 @@
 import streamlit as st
 
-# Center the layout
+# Centered layout
 st.set_page_config(
     layout="centered",  # Center the layout
     initial_sidebar_state="collapsed"  # Collapse the sidebar by default
@@ -13,7 +13,7 @@ def show_home_page():
     # Centered logo
     st.markdown("""
     <div style="text-align: center;">
-        <img src="https://raw.githubusercontent.com/jchrispin73/living-diary/main/FullLogo_Transparent_NoBuffer.png" style="width: 180px; height: auto; margin: 0 auto;">
+        <img src="https://raw.githubusercontent.com/jchrispin73/living-diary/main/FullLogo_Transparent_NoBuffer.png" width="180">
     </div>
     """, unsafe_allow_html=True)
 
@@ -28,8 +28,18 @@ def show_home_page():
 
     # Mood selector
     mood = st.selectbox("Pick a mood to help match your reflection to a resource:", [
-        "😴 Tired", "😢 Sad", "😧 Overwhelmed", "😊 Calm", "❤️ Loved", "💔 Heartbroken", 
-        "😡 Angry", "🌱 Grounded", "😟 Anxious", "💫 Inspired", "🤔 Confused", "🌈 Hopeful"
+        "😴 Tired", "😞 Sad", "😟 Overwhelmed", "😊 Calm", "❤️ Loved", "💔 Heartbroken",
+        "😠 Angry", "🌱 Grounded", "😓 Anxious", "💡 Inspired", "🤔 Confused", "🌈 Hopeful"
     ])
 
+    # Text input for reflection
     journal = st.text_area("You can type below if you'd like to reflect:")
+
+    # Save entry button
+    save_button = st.button("Save Entry", use_container_width=True)
+
+    # Action when the save button is clicked
+    if save_button:
+        # Logic to save the journal entry
+        st.success("Entry saved! You can return to it later.")
+
