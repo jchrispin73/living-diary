@@ -27,8 +27,10 @@ def show_home_page():
         "What emotion keeps showing up lately?"
     ])
 
-    mood = st.selectbox("Pick a mood to help match your reflection to a resource:", [
-        "😌 Calm", "😴 Tired", "😔 Sad", "😡 Angry", "😊 Joyful"
+    # Mood selector
+mood = st.selectbox("Pick a mood to help match your reflection to a resource:", [
+    "💤 Tired", "🌧️ Sad", "🌪️ Overwhelmed", "😌 Calm", "💖 Loved", "💔 Heartbroken",
+    "🔥 Angry", "🧘 Grounded", "🌀 Anxious", "🌟 Inspired", "🙃 Confused", "🌈 Hopeful"
     ])
 
     journal = st.text_area("You can type below if you'd like to reflect:")
