@@ -16,31 +16,27 @@ st.set_page_config(
 col1, col2, col3 = st.columns([1, 1, 1])  # Adjust proportions for responsiveness
 
 with col1:
-    home_button = st.button("Home", use_container_width=True)
+    home_button = st.button("Home", use_container_width=True, key="home")
 
 with col2:
-    gratitude_button = st.button("Gratitude Journal", use_container_width=True)
+    gratitude_button = st.button("Gratitude Journal", use_container_width=True, key="gratitude")
 
 with col3:
-    profile_button = st.button("Profile", use_container_width=True)
+    profile_button = st.button("Profile", use_container_width=True, key="profile")
 
 # Add second row for the next set of buttons (Settings, Talk, Resources)
 col4, col5, col6 = st.columns([1, 1, 1])  # Adjust proportions for responsiveness
 
 with col4:
-    resources_button = st.button("Resources", use_container_width=True)
+    resources_button = st.button("Resources", use_container_width=True, key="resources")
 
 with col5:
-    settings_button = st.button("Settings", use_container_width=True)
+    settings_button = st.button("Settings", use_container_width=True, key="settings")
 
 with col6:
-    talk_button = st.button("Talk", use_container_width=True)
+    talk_button = st.button("Talk", use_container_width=True, key="talk")
 
-# Default page set to "Home" if no other button is clicked
-if not home_button and not gratitude_button and not profile_button and not resources_button and not settings_button and not talk_button:
-    home_button = True  # Automatically show the Home page if no other button is pressed
-
-# Display the content based on which button is pressed
+# Handle button presses and display respective content
 if home_button:
     show_home_page()  # Show Home page
 elif gratitude_button:
@@ -51,3 +47,6 @@ elif resources_button:
     show_resources_page()  # Show Resources page
 elif settings_button:
     show_settings_page()  # Show Settings page
+elif talk_button:
+    # Show the talk page if needed
+    pass
