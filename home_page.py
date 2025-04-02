@@ -50,12 +50,17 @@ def show_home_page():
 
     # Load the CSV for images and quotes
         df = pd.read_csv("Enhanced_Quote_Images_Living_Diary_new.csv")
+        st.write("CSV column names:", df.columns.tolist())
+st.write("First few rows:", df.head())
+
     df.columns = df.columns.str.strip().str.lower()  # Clean column headers
     df["mood"] = df["mood"].astype(str).str.strip().str.lower()  # Clean values too
 
     if "selected_mood" in st.session_state:
         mood = st.session_state["selected_mood"].strip().lower()
-        filtered = df[df["mood"] == mood]
+        st.write("User-selected mood:", mood)
+st.write("Available moods in CSV:", df["mood"].unique().tolist())
+filtered = df[df["mood"] == mood]
 
         if not filtered.empty:
             selected_row = filtered.sample(n=1).iloc[0]
