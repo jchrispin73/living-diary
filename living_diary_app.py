@@ -36,13 +36,6 @@ with col5:
 with col6:
     talk_button = st.button("Talk", use_container_width=True)
 
-# Center the logo below the buttons
-st.markdown("""
-<div style="text-align: center;">
-    <img src="https://raw.githubusercontent.com/jchrispin73/living-diary/main/FullLogo_Transparent_NoBuffer.png" style="width: 180px; height: auto; margin: 0 auto;">
-</div>
-""", unsafe_allow_html=True)
-
 # Default page set to "Home" if no other button is clicked
 if not home_button and not gratitude_button and not profile_button and not resources_button and not settings_button and not talk_button:
     home_button = True  # Automatically show the Home page if no other button is pressed
