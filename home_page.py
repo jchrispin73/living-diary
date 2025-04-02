@@ -38,11 +38,11 @@ with col6:
 # Function to display home page content
 def show_home_page():
     # Display the logo and leaf images here
-    col7, col8 = st.columns([1, 1.0])  # Adjust for logo and leaf alignment
+    col7, col8 = st.columns([1, 0.9])  # Adjust for logo and leaf alignment
     with col7:
         st.image("FullLogo_Transparent_NoBuffer.png", width=180)  # Logo
     with col8:
-        st.image("living diary soft place to land transparent.png", width=200)  # Leaf Design
+        st.image("living diary soft place to land transparent.png", width=400)  # Leaf Design
 
     # Display daily quote (you can integrate your quote logic here)
     st.markdown("**daily quote here**")
