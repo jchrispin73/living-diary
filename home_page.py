@@ -27,7 +27,7 @@ with col2:
 with col3:
     profile_button = st.button("Profile", use_container_width=True)
 
-# Add second row for the next set of buttons (Settings, Talk, Resources)
+# Add second row for the next set of buttons (Resources, Settings, Talk)
 col4, col5, col6 = st.columns([1, 1, 1])  # Adjust proportions for responsiveness
 
 with col4:
@@ -41,7 +41,7 @@ with col6:
 
 # Function to display home page content
 def show_home_page():
-    # Display the logo and leaf images here
+    # Display the logo and leaf images
     col7, col8 = st.columns([1, 0.9])  # Adjust for logo and leaf alignment
     with col7:
         st.image("FullLogo_Transparent_NoBuffer.png", width=180)  # Logo
@@ -49,30 +49,48 @@ def show_home_page():
         st.image("living diary soft place to land transparent.png", width=400)  # Leaf Design
 
     # Load the CSV for images and quotes
-df = pd.read_csv("Enhanced_Quote_Images_Living_Diary_new.csv")
-df.columns = df.columns.str.strip().str.lower()  # Clean headers
-df["mood"] = df["mood"].astype(str).str.strip().str.lower()  # Clean values
+    df = pd.read_csv("Enhanced_Quote_Images_Living_Diary_new.csv")
+    df.columns = df.columns.str.strip().str.lower()  # Clean headers
+    df["mood"] = df["mood"].astype(str).str.strip().str.lower()  # Clean values
 
-st.write("CSV column names:", df.columns.tolist())
-st.write("First few rows:", df.head())
+    # Debug info (can be removed later)
+    st.write("CSV column names:", df.columns.tolist())
+    st.write("First few rows:", df.head())
 
-if "selected_mood" in st.session_state:
-    mood = st.session_state["selected_mood"].strip().lower()
-    st.write("User-selected mood:", mood)
-    st.write("Available moods in CSV:", df["mood"].unique().tolist())
+    # Show mood-matched quote/image if available
+    if "selected_mood" in st.session_state:
+        mood = st.session_state["selected_mood"].strip().lower()
+        st.write("User-selected mood:", mood)
+        st.write("Available moods in CSV:", df["mood"].unique().tolist())
 
-    filtered = df[df["mood"] == mood]
+        filtered = df[df["mood"] == mood]
 
-    if not filtered.empty:
-        selected_row = filtered.sample(n=1).iloc[0]
-        quote_text = selected_row["quote"]
-        author = selected_row["author"]
-        image_url = selected_row["image link"]
+        if not filtered.empty:
+            selected_row = filtered.sample(n=1).iloc[0]
+            quote_text = selected_row["quote"]
+            author = selected_row["author"]
+            image_url = selected_row["image link"]
 
-        st.markdown(f"### “{quote_text}”")
-        st.markdown(f"**— {author}**")
-        st.image(image_url, caption="Image for reflection", use_column_width=True)
+            st.markdown(f"### “{quote_text}”")
+            st.markdown(f"**— {author}**")
+            st.image(image_url, caption="Image for reflection", use_column_width=True)
+        else:
+            st.info("No matching quote found for your mood. Try journaling again.")
     else:
-        st.info("No matching quote found for your mood. Try journaling again.")
-else:
-    st.info("Start by journaling to see your daily quote and reflection image.")
+        st.info("Start by journaling to see your daily quote and reflection image.")
+
+# Show the appropriate page
+if home_button:
+    show_home_page()
+elif gratitude_button:
+    show_gratitude_journal()
+elif profile_button:
+    show_profile_page()
+elif resources_button:
+    show_resources_page()
+elif settings_button:
+    show_settings_page()
+
+# Default to home page if no button is clicked
+if not home_button and not gratitude_button and not profile_button and not resources_button and not settings_button and not talk_button:
+    show_home_page()
