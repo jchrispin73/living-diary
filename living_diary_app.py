@@ -18,7 +18,9 @@ quotes_df = pd.read_csv('Enhanced_Quote_Images_Living_Diary new.csv')
 
 # Function to get the quote and image for the selected mood
 def get_mood_resource(mood):
+    # Filter the CSV based on the selected mood
     filtered = quotes_df[quotes_df['mood'] == mood]
+
     if not filtered.empty:
         # Randomly select a quote and image based on the mood
         selected_resource = filtered.sample(1).iloc[0]
@@ -60,17 +62,25 @@ if home_button:
     show_home_page()  # Show Home page
 elif gratitude_button:
     show_gratitude_journal()  # Show Gratitude Journal page
+    
     # After gratitude journal submission, show the matching resource
     mood = st.session_state.get('mood', None)
     if mood:
         quote, image_path = get_mood_resource(mood)
         if quote and image_path:
-            st.image(image_path)
-            st.write(quote)
+            # Show the quote and image right after journaling
+            st.image(image_path, use_column_width=True)
+            st.write(f"**Quote of the Day**: {quote}")
+            
+            # Save the entry to the Resources page
+            st.session_state.resources = st.session_state.get('resources', [])
+            st.session_state.resources.append({'quote': quote, 'image': image_path})
+            show_resources_page()  # Navigate to Resources page
+        else:
+            st.write("No resource found for this mood.")
 elif profile_button:
     show_profile_page()  # Show Profile page
 elif resources_button:
     show_resources_page()  # Show Resources page
 elif settings_button:
     show_settings_page()  # Show Settings page
-
