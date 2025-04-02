@@ -73,19 +73,35 @@ def show_home_page():
 
   # Display the image
 
-# Page flow based on the button clicked
-if home_button:
-    show_home_page()  # Show the home page content
-elif gratitude_button:
-    show_gratitude_journal()  # Show Gratitude Journal page
-elif profile_button:
-    show_profile_page()  # Show Profile page
-elif resources_button:
-    show_resources_page()  # Show Resources page
-elif settings_button:
-    show_settings_page()  # Show Settings page
+# Track which page is currently active
+if "current_page" not in st.session_state:
+    st.session_state["current_page"] = "Home"
 
-# Default to home page if no button is clicked
-if not home_button and not gratitude_button and not profile_button and not resources_button and not settings_button and not talk_button:
-    home_button = True  # Automatically show the Home page if no other button is pressed
-    show_home_page()  # Show Home page
+# Update page based on button clicks
+if home_button:
+    st.session_state["current_page"] = "Home"
+elif gratitude_button:
+    st.session_state["current_page"] = "Gratitude"
+elif profile_button:
+    st.session_state["current_page"] = "Profile"
+elif resources_button:
+    st.session_state["current_page"] = "Resources"
+elif settings_button:
+    st.session_state["current_page"] = "Settings"
+elif talk_button:
+    st.session_state["current_page"] = "Talk"
+
+# Show the correct page
+if st.session_state["current_page"] == "Home":
+    show_home_page()
+elif st.session_state["current_page"] == "Gratitude":
+    show_gratitude_journal()
+elif st.session_state["current_page"] == "Profile":
+    show_profile_page()
+elif st.session_state["current_page"] == "Resources":
+    show_resources_page()
+elif st.session_state["current_page"] == "Settings":
+    show_settings_page()
+elif st.session_state["current_page"] == "Talk":
+    st.markdown("**Talk feature coming soon.**")
+
