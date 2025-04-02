@@ -38,6 +38,7 @@ with col6:
 # Logo centered below buttons
 # Logo centered below buttons
 st.markdown(
+    """
     <div style="text-align: center;">
         <img src="images/FullLogo_Transparent_NoBuffer.png" style="width: 180px; height: auto; margin: 0 auto;">
     </div>
