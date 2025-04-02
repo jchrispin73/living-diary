@@ -1,111 +1,46 @@
 import streamlit as st
-import pandas as pd
-import re
 from home_page import show_home_page
 from gratitude_journal import show_gratitude_journal
-from profile_page import show_profile_page
-from resources_page import show_resources_page
-from settings_page import show_settings_page
+from profile_page import show_profile_page  # Imported profile page
+from resources_page import show_resources_page  # Imported resources page
+from settings_page import show_settings_page  # Imported settings page
 
-# Set page config
+# Must be the very first Streamlit command
 st.set_page_config(
     page_title="Living Diary",
     layout="centered",  # Ensure content is centered
     initial_sidebar_state="collapsed"  # Collapse sidebar by default
 )
 
-# Show the logo in the header
-st.image("FullLogo_Transparent_NoBuffer.png", width=200)
-
-# Function to recommend resource based on user entry and mood
-def recommend_resource(user_entry, mood):
-    # Load your resource CSV
-    df = pd.read_csv("Enhanced_Living_Diary_Index_UPDATED.csv")
-
-    # Extract keywords from user entry
-    user_words = set(re.findall(r'\w+', user_entry.lower()))
-
-    def score_row(row):
-        # Match keywords in user entry to the resource keywords
-        keywords = str(row['Keywords']).lower().split(',')
-        return len(set(map(str.strip, keywords)) & user_words)
-
-    df['score'] = df.apply(score_row, axis=1)
-    top_match = df[df['score'] > 0].sort_values(by='score', ascending=False).head(1)
-
-    if not top_match.empty:
-        resource = top_match.iloc[0]
-        # Show the recommended resource (quote and download link)
-        st.image(resource['Image'], width=300)
-        st.markdown(f"**{resource['Quote']}**")
-        st.markdown(f"[Download Resource PDF]({resource['Drive Link']})", unsafe_allow_html=True)
-
-        # Save the recommended resource in session state
-        if "recommended_resources" not in st.session_state:
-            st.session_state.recommended_resources = []
-        st.session_state.recommended_resources.append(resource)
-    else:
-        st.info("No matching resource found — but more are coming soon!")
-
-# Function to display Home Page
-def show_home_page():
-    st.markdown("### 🌈 Here's a gentle journaling prompt for you:")
-    
-    # Mood selector
-    mood = st.selectbox("Pick a mood to help match your reflection to a resource:", [
-        "💤 Tired", "🌧️ Sad", "🌪️ Overwhelmed", "😌 Calm", "💖 Loved", "💔 Heartbroken",
-        "🔥 Angry", "🧘 Grounded", "🌀 Anxious", "🌟 Inspired", "🙃 Confused", "🌈 Hopeful"
-    ])
-    
-    # User entry text area
-    user_entry = st.text_area("You can type below if you'd like to reflect:", placeholder="Start writing here...")
-    
-    # After submitting, display the recommended resource
-    if st.button("💜 Save Entry"):
-        if user_entry:
-            recommend_resource(user_entry, mood)  # Recommend resource based on entry
-            st.success("💜 Entry saved! You can return to it later.")
-
-# Function to display Resources Page
-def show_resources_page():
-    if "recommended_resources" in st.session_state and st.session_state.recommended_resources:
-        st.markdown("### Your Recommended Resources")
-        for resource in st.session_state.recommended_resources:
-            st.image(resource['Image'], width=300)
-            st.markdown(f"**{resource['Quote']}**")
-            st.markdown(f"[Download Resource PDF]({resource['Drive Link']})", unsafe_allow_html=True)
-    else:
-        st.info("No resources yet! Try journaling to get a recommendation.")
-
-# Main layout setup with radio buttons for navigation
-col1, col2, col3 = st.columns([1, 1, 1])  # Adjust columns for buttons
+# Use st.columns to manage layout
+col1, col2, col3 = st.columns([1, 1, 1])  # Adjust proportions for responsiveness
 
 with col1:
-    home_button = st.button("Home")
+    home_button = st.button("Home", use_container_width=True)
 
 with col2:
-    gratitude_button = st.button("Gratitude Journal")
+    gratitude_button = st.button("Gratitude Journal", use_container_width=True)
 
 with col3:
-    profile_button = st.button("Profile")
+    profile_button = st.button("Profile", use_container_width=True)
 
-# Second row for additional buttons
-col4, col5, col6 = st.columns([1, 1, 1]) 
+# Add second row for the next set of buttons (Settings, Talk, Resources)
+col4, col5, col6 = st.columns([1, 1, 1])  # Adjust proportions for responsiveness
 
 with col4:
-    resources_button = st.button("Resources")
+    resources_button = st.button("Resources", use_container_width=True)
 
 with col5:
-    settings_button = st.button("Settings")
+    settings_button = st.button("Settings", use_container_width=True)
 
 with col6:
-    talk_button = st.button("Talk")
+    talk_button = st.button("Talk", use_container_width=True)
 
-# Default page set to "Home"
+# Default page set to "Home" if no other button is clicked
 if not home_button and not gratitude_button and not profile_button and not resources_button and not settings_button and not talk_button:
-    home_button = True  # Set "Home" as default if no other button is pressed
+    home_button = True  # Automatically show the Home page if no other button is pressed
 
-# Display content based on which button is pressed
+# Display the content based on which button is pressed
 if home_button:
     show_home_page()  # Show Home page
 elif gratitude_button:
