@@ -1,6 +1,13 @@
 import streamlit as st
+import pandas as pd
 
 def show_gratitude_journal():
+    # Load CSV with moods and corresponding images
+    mood_image_df = pd.read_csv("Enhanced_Quote_Images_Living_Diary new.csv")
+
+    # Create a dictionary to map moods to images
+    mood_to_image = {mood: image for mood, image in zip(mood_image_df['Mood'], mood_image_df['Image URL'])}
+
     st.title("🌸 Gratitude Journal")
 
     with st.form("gratitude_form"):
@@ -22,10 +29,20 @@ def show_gratitude_journal():
         notes = st.text_area("Any extra thoughts or reminders?", key="n1")
 
         st.subheader("Today I am feeling...")
+        # Mood selection dropdown
+        mood_options = list(mood_to_image.keys())
+        selected_mood = st.selectbox("Select your mood", mood_options, key="mood")
+
+        st.subheader("How are you feeling today?")
         feelings = st.text_area("Describe how you're feeling right now", key="f1")
 
         submitted = st.form_submit_button("Save Journal Entry")
 
         if submitted:
             st.success("💖 Entry saved! You can return to it later.")
+            
+            # Display mood-based image
+            st.image(mood_to_image[selected_mood], caption=f"Image for mood: {selected_mood}", width=300)
 
+# Call the function to display the gratitude journal
+show_gratitude_journal()
