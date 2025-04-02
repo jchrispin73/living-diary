@@ -14,6 +14,9 @@ st.set_page_config(
     initial_sidebar_state="collapsed"  # Collapse sidebar by default
 )
 
+# Show the logo in the header
+st.image("FullLogo_Transparent_NoBuffer.png", width=200)
+
 # Function to recommend resource based on user entry and mood
 def recommend_resource(user_entry, mood):
     # Load your resource CSV
