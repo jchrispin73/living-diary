@@ -1,74 +1,69 @@
 import streamlit as st
-import pandas as pd
-import re
 
-# Centered layout
-st.set_page_config(
-    layout="centered",  # Center the layout
-    initial_sidebar_state="collapsed"  # Collapse the sidebar by default
-)
-
-# Remove the sidebar completely
-st.sidebar.empty()
-
+# Home page content
 def show_home_page():
-    # Centered logo
-    st.markdown("""
-    <div style="text-align: center;">
-        <img src="https://raw.githubusercontent.com/jchrispin73/living-diary/main/FullLogo_Transparent_NoBuffer.png" width="180">
-    </div>
-    """, unsafe_allow_html=True)
+    # Add top navigation buttons
+    col1, col2, col3 = st.columns([1, 1, 1])  # Adjust proportions for responsiveness
+    with col1:
+        home_button = st.button("Home", use_container_width=True)
+    with col2:
+        gratitude_button = st.button("Gratitude Journal", use_container_width=True)
+    with col3:
+        profile_button = st.button("Profile", use_container_width=True)
 
-    # Main content for the "Home" page
-    st.markdown("### Here's a gentle journaling prompt for you:")
+    # Second row for other buttons (Resources, Settings, Talk)
+    col4, col5, col6 = st.columns([1, 1, 1])  # Adjust proportions for responsiveness
+    with col4:
+        resources_button = st.button("Resources", use_container_width=True)
+    with col5:
+        settings_button = st.button("Settings", use_container_width=True)
+    with col6:
+        talk_button = st.button("Talk", use_container_width=True)
 
-    prompt = st.selectbox("Pick a prompt", [
-        "If my heart could speak, what would it say?",
-        "Right now, I am feeling...",
-        "What emotion keeps showing up lately?"
-    ])
+    # Add logo and leaf side by side
+    col7, col8 = st.columns([1, 0.2, 1])  # Adjust for logo and leaf alignment
+    with col7:
+        st.markdown(
+            """
+            <div style="text-align: center;">
+                <img src="https://raw.githubusercontent.com/jchrispin73/living-diary/main/FullLogo_Transparent_NoBuffer.png" width="100">
+            </div>
+            """, unsafe_allow_html=True
+        )
+    with col8:
+        st.markdown(
+            """
+            <div style="text-align: center;">
+                <img src="https://raw.githubusercontent.com/jchrispin73/living-diary/main/leaf_image.png" width="50">
+            </div>
+            """, unsafe_allow_html=True
+        )
 
-    # Mood selector
-    mood = st.selectbox("Pick a mood to help match your reflection to a resource:", [
-        "😴 Tired", "😞 Sad", "😟 Overwhelmed", "😊 Calm", "❤️ Loved", "💔 Heartbroken",
-        "😠 Angry", "🌱 Grounded", "😓 Anxious", "💡 Inspired", "🤔 Confused", "🌈 Hopeful"
-    ])
+    # Add the quote section below the logo
+    st.markdown("### Living Diary")
+    st.markdown("A soft place to land when you're feeling emotionally full or need support.")
+    st.markdown("**daily quote here**")
 
-    # Text input for reflection
-    journal = st.text_area("You can type below if you'd like to reflect:")
+    # Add the reflective image placeholder below the quote
+    st.markdown("### Reflective Image")
+    st.image("https://via.placeholder.com/150", caption="reflective image", use_column_width=True)
 
-    # Save entry button
-    save_button = st.button("Save Entry", use_container_width=True)
-
-    # Action when the save button is clicked
-    if save_button:
-        # Save the journal entry in the session state
-        if 'entries' not in st.session_state:
-            st.session_state.entries = []
-        st.session_state.entries.append({"mood": mood, "text": journal})
-        st.success("💖 Entry saved! You can return to it in 'Previous Entries' later.")
-
-        # Resource matching from keywords
-        if journal:
-            try:
-                df = pd.read_csv("Enhanced_Living_Diary_Index_UPDATED.csv")
-            except FileNotFoundError:
-                st.error("🚫 The file 'Enhanced_Living_Diary_Index_UPDATED.csv' was not found. Make sure it's uploaded and named correctly.")
-                st.stop()
-
-            user_words = set(re.findall(r'\w+', journal.lower()))
-
-            def score_row(row):
-                keywords = str(row['Keywords']).lower().split(',')
-                return len(set(map(str.strip, keywords)) & user_words)
-
-            df['score'] = df.apply(score_row, axis=1)
-            top_match = df[df['score'] > 0].sort_values(by='score', ascending=False).head(1)
-
-            if not top_match.empty:
-                resource = top_match.iloc[0]
-                st.markdown("### Based on how you're feeling, this might help:")
-                st.markdown(f"**{resource.get('Quote', 'Here’s something gentle to explore.')}**")
-                st.markdown(f"📝 Here's a journal you might find supportive: [*{resource['File Name']}*]({resource['Drive Link']})", unsafe_allow_html=True)
-            else:
-                st.info("No matching resource found — but more are coming soon!")
+    # Optionally handle other logic for when buttons are clicked
+    if home_button:
+        # Show Home content or redirect here
+        pass
+    if gratitude_button:
+        # Show Gratitude Journal content
+        pass
+    if profile_button:
+        # Show Profile content
+        pass
+    if resources_button:
+        # Show Resources content
+        pass
+    if settings_button:
+        # Show Settings content
+        pass
+    if talk_button:
+        # Show Talk content
+        pass
