@@ -33,7 +33,7 @@ with col6:
 
 # Function to display Home Page
 def show_home_page():
-    # Display logos (same header as before)
+    # Display logos below the header
     col7, col8 = st.columns([1, 0.9])
     with col7:
         st.image("FullLogo_Transparent_NoBuffer.png", width=180)
@@ -58,7 +58,46 @@ def show_home_page():
             image_url = selected_row["image link"]
             has_text = selected_row["hastext"]
 
-            # Show image below header
+            # Show image under header
             st.image(image_url, caption="Image for reflection", use_container_width=True, width=500)
 
-            # Only show quote and author if the image
+            # Only show quote and author if the image does NOT already have text on it
+            if not has_text:
+                st.markdown(f"### “{quote}”")
+                st.markdown(f"**— {author}**")
+        else:
+            st.info("No matching quote found for your mood. Try journaling again.")
+    else:
+        st.info("Start by journaling to see your daily quote and reflection image.")
+
+# Track current page across reruns
+if "current_page" not in st.session_state:
+    st.session_state["current_page"] = "Home"
+
+# Update page when buttons are clicked
+if home_button:
+    st.session_state["current_page"] = "Home"
+elif gratitude_button:
+    st.session_state["current_page"] = "Gratitude"
+elif profile_button:
+    st.session_state["current_page"] = "Profile"
+elif resources_button:
+    st.session_state["current_page"] = "Resources"
+elif settings_button:
+    st.session_state["current_page"] = "Settings"
+elif talk_button:
+    st.session_state["current_page"] = "Talk"
+
+# Show the correct page based on state
+if st.session_state["current_page"] == "Home":
+    show_home_page()
+elif st.session_state["current_page"] == "Gratitude":
+    show_gratitude_journal()
+elif st.session_state["current_page"] == "Profile":
+    show_profile_page()
+elif st.session_state["current_page"] == "Resources":
+    show_resources_page()
+elif st.session_state["current_page"] == "Settings":
+    show_settings_page()
+elif st.session_state["current_page"] == "Talk":
+    st.markdown("**Talk feature coming soon.**")
