@@ -59,12 +59,13 @@ if "selected_mood" in st.session_state:
         has_text = selected_row["hastext"]
 
         # Show image
-        st.image(image_url, caption="Image for reflection", use_container_width=True)
+        st.image(image_url, caption="Image for reflection", use_container_width=False, width=500)
 
         # Only show quote and author if the image does NOT already have text on it
         if not has_text:
             st.markdown(f"### “{quote}”")
             st.markdown(f"**— {author}**")
+
     else:
         st.info("No matching quote found for your mood. Try journaling again.")
 else:
