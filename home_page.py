@@ -33,7 +33,7 @@ with col6:
 
 # Function to display Home Page
 def show_home_page():
-    # Header with buttons and logos (This remains as it was)
+    # Header with buttons (keeping this part the same as before)
     col1, col2, col3 = st.columns([1, 1, 1])
     with col1:
         st.button("Home", use_container_width=True)
@@ -75,7 +75,7 @@ def show_home_page():
             image_url = selected_row["image link"]
             has_text = selected_row["hastext"]
 
-            # Show image under the header
+            # Show image under the header (image comes below logo section)
             st.image(image_url, caption="Image for reflection", use_container_width=True, width=500)
 
             # Only show quote and author if the image does NOT already have text on it
