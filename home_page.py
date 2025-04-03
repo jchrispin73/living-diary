@@ -44,6 +44,8 @@ def show_home_page():
     df = pd.read_csv("Enhanced_Quote_Images_Living_Diary_new.csv")
     df.columns = df.columns.str.strip().str.lower()
     df["mood"] = df["mood"].astype(str).str.strip().str.lower()
+    df["has_text_on_image"] = df["has_text_on_image"].astype(str).str.lower() == "true"
+
 
     # Check for mood in session
     if "selected_mood" in st.session_state:
