@@ -38,7 +38,7 @@ def show_home_page():
     with col7:
         st.image("FullLogo_Transparent_NoBuffer.png", width=180)
     with col8:
-        st.image("living diary soft place to land transparent.png", width=400)
+        st.image("living diary soft place to land transparent.png", width=275)
 
     # Load and clean the CSV
     df = pd.read_csv("Enhanced_Quote_Images_Living_Diary_new.csv")
