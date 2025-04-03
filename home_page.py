@@ -50,20 +50,26 @@ def show_home_page():
         mood = st.session_state["selected_mood"].strip().lower()
         filtered = df[df["mood"] == mood]
 
-        if not filtered.empty:
-            selected_row = filtered.sample(n=1).iloc[0]
-            quote = selected_row["quote"]
-            author = selected_row["author"]
-            image_url = selected_row["image link"]
-            st.write("Image URL:", image_url)
+            if not filtered.empty:
+        selected_row = filtered.sample(n=1).iloc[0]
+        quote = selected_row["quote"]
+        author = selected_row["author"]
+        image_url = selected_row["image link"]
+        has_text = selected_row["has_text_on_image"]
 
+        # Show image
+        st.image(image_url, caption="Image for reflection", use_container_width=True)
+
+        # Only show quote and author if the image does NOT already have text on it
+        if not has_text:
             st.markdown(f"### “{quote}”")
             st.markdown(f"**— {author}**")
-            st.image(image_url, caption="Image for reflection", use_container_width=True)
-        else:
-            st.info("No matching quote found for your mood. Try journaling again.")
+
     else:
-        st.info("Start by journaling to see your daily quote and reflection image.")
+        st.info("No matching quote found for your mood. Try journaling again.")
+else:
+    st.info("Start by journaling to see your daily quote and reflection image.")
+
 
 # Track current page across reruns
 if "current_page" not in st.session_state:
