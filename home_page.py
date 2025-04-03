@@ -59,7 +59,7 @@ def show_home_page():
             has_text = selected_row["hastext"]
 
             # Show image under header
-            st.image(image_url, caption="Image for reflection", use_container_width=True, width=275)
+            st.image(image_url, caption="Image for reflection", use_container_width=False, width=275)
 
             # Only show quote and author if the image does NOT already have text on it
             if not has_text:
