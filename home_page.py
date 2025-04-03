@@ -38,7 +38,7 @@ def show_home_page():
     with col7:
         st.image("FullLogo_Transparent_NoBuffer.png", width=180)
     with col8:
-        st.image("living diary soft place to land transparent.png", width=275)
+        st.image("living diary soft place to land transparent.png", width=300)
 
     # Load and clean the CSV
     df = pd.read_csv("Enhanced_Quote_Images_Living_Diary_new.csv")
@@ -59,7 +59,7 @@ def show_home_page():
             has_text = selected_row["hastext"]
 
             # Show image under header
-            st.image(image_url, caption="Image for reflection", use_container_width=True, width=400)
+            st.image(image_url, caption="Image for reflection", use_container_width=True, width=275)
 
             # Only show quote and author if the image does NOT already have text on it
             if not has_text:
