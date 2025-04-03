@@ -41,13 +41,12 @@ def show_home_page():
         st.image("living diary soft place to land transparent.png", width=400)
 
     # Load and clean the CSV
-    df = pd.read_csv("Enhanced_Quote_Images_Living_Diary_new.csv")
-    df.columns = df.columns.str.strip().str.lower()
-    df["mood"] = df["mood"].astype(str).str.strip().str.lower()
-    df["has_text_on_image"] = df["has_text_on_image"].astype(str).str.lower() == "true"
+df = pd.read_csv("Enhanced_Quote_Images_Living_Diary_new.csv")
+df.columns = df.columns.str.strip().str.lower()
+df["mood"] = df["mood"].astype(str).str.strip().str.lower()
+df["hastext"] = df["hastext"].astype(str).str.lower() == "true"
 
-
-    # Check for mood in session
+# Check for mood in session
 if "selected_mood" in st.session_state:
     mood = st.session_state["selected_mood"].strip().lower()
     filtered = df[df["mood"] == mood]
@@ -57,10 +56,10 @@ if "selected_mood" in st.session_state:
         quote = selected_row["quote"]
         author = selected_row["author"]
         image_url = selected_row["image link"]
-        has_text = selected_row["has_text_on_image"]
+        has_text = selected_row["hastext"]
 
-        # Show image (resized)
-        st.image(image_url, caption="Image for reflection", use_container_width=False, width=500)
+        # Show image
+        st.image(image_url, caption="Image for reflection", use_container_width=True)
 
         # Only show quote and author if the image does NOT already have text on it
         if not has_text:
@@ -70,6 +69,7 @@ if "selected_mood" in st.session_state:
         st.info("No matching quote found for your mood. Try journaling again.")
 else:
     st.info("Start by journaling to see your daily quote and reflection image.")
+
 
 # Track current page across reruns
 if "current_page" not in st.session_state:
