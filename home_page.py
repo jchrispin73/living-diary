@@ -14,23 +14,6 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Navigation buttons - TOP OF PAGE (unchanged)
-col1, col2, col3 = st.columns([1, 1, 1])
-with col1:
-    home_button = st.button("Home", use_container_width=True)
-with col2:
-    gratitude_button = st.button("Gratitude Journal", use_container_width=True)
-with col3:
-    profile_button = st.button("Profile", use_container_width=True)
-
-col4, col5, col6 = st.columns([1, 1, 1])
-with col4:
-    resources_button = st.button("Resources", use_container_width=True)
-with col5:
-    settings_button = st.button("Settings", use_container_width=True)
-with col6:
-    talk_button = st.button("Talk", use_container_width=True)
-
 # Function to display Home Page
 def show_home_page():
     # Header with buttons and logos
@@ -50,7 +33,7 @@ def show_home_page():
     with col6:
         talk_button = st.button("Talk", use_container_width=True)
 
-    # Display logos
+    # Display logos below the buttons
     col7, col8 = st.columns([1, 0.9])
     with col7:
         st.image("FullLogo_Transparent_NoBuffer.png", width=180)
@@ -86,8 +69,6 @@ def show_home_page():
             st.info("No matching quote found for your mood. Try journaling again.")
     else:
         st.info("Start by journaling to see your daily quote and reflection image.")
-
-
 
 # Track current page across reruns
 if "current_page" not in st.session_state:
