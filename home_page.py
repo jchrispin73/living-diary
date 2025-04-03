@@ -55,6 +55,7 @@ def show_home_page():
             quote = selected_row["quote"]
             author = selected_row["author"]
             image_url = selected_row["image link"]
+            st.write("Image URL:", image_url)
 
             st.markdown(f"### “{quote}”")
             st.markdown(f"**— {author}**")
