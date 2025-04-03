@@ -58,8 +58,11 @@ def show_home_page():
             image_url = selected_row["image link"]
             has_text = selected_row["hastext"]
 
-            # Show image under header
-            st.image(image_url, caption="Image for reflection", use_container_width=False, width=400)
+            # Show image under header and center it
+            col1, col2, col3 = st.columns([1, 3, 1])  # Adjust column widths to center the image
+            with col2:
+                st.image(image_url, caption="Image for reflection", use_container_width=False, width=400)
+
 
             # Only show quote and author if the image does NOT already have text on it
             if not has_text:
