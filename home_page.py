@@ -17,40 +17,23 @@ st.set_page_config(
 # Navigation buttons - TOP OF PAGE (unchanged)
 col1, col2, col3 = st.columns([1, 1, 1])
 with col1:
-    home_button = st.button("Home", key="home_button", use_container_width=True)
+    home_button = st.button("Home", use_container_width=True)
 with col2:
-    gratitude_button = st.button("Gratitude Journal", key="gratitude_button", use_container_width=True)
+    gratitude_button = st.button("Gratitude Journal", use_container_width=True)
 with col3:
-    profile_button = st.button("Profile", key="profile_button", use_container_width=True)
+    profile_button = st.button("Profile", use_container_width=True)
 
 col4, col5, col6 = st.columns([1, 1, 1])
 with col4:
-    resources_button = st.button("Resources", key="resources_button", use_container_width=True)
+    resources_button = st.button("Resources", use_container_width=True)
 with col5:
-    settings_button = st.button("Settings", key="settings_button", use_container_width=True)
+    settings_button = st.button("Settings", use_container_width=True)
 with col6:
-    talk_button = st.button("Talk", key="talk_button", use_container_width=True)
+    talk_button = st.button("Talk", use_container_width=True)
 
 # Function to display Home Page
 def show_home_page():
-    # Header with buttons and logos
-    col1, col2, col3 = st.columns([1, 1, 1])
-    with col1:
-        st.button("Home", key="home_button", use_container_width=True)
-    with col2:
-        st.button("Gratitude Journal", key="gratitude_button", use_container_width=True)
-    with col3:
-        st.button("Profile", key="profile_button", use_container_width=True)
-
-    col4, col5, col6 = st.columns([1, 1, 1])
-    with col4:
-        st.button("Resources", key="resources_button", use_container_width=True)
-    with col5:
-        st.button("Settings", key="settings_button", use_container_width=True)
-    with col6:
-        st.button("Talk", key="talk_button", use_container_width=True)
-
-    # Display logos
+    # Display logos (same header as before)
     col7, col8 = st.columns([1, 0.9])
     with col7:
         st.image("FullLogo_Transparent_NoBuffer.png", width=180)
@@ -75,46 +58,7 @@ def show_home_page():
             image_url = selected_row["image link"]
             has_text = selected_row["hastext"]
 
-            # Show image under header
+            # Show image below header
             st.image(image_url, caption="Image for reflection", use_container_width=True, width=500)
 
-            # Only show quote and author if the image does NOT already have text on it
-            if not has_text:
-                st.markdown(f"### “{quote}”")
-                st.markdown(f"**— {author}**")
-        else:
-            st.info("No matching quote found for your mood. Try journaling again.")
-    else:
-        st.info("Start by journaling to see your daily quote and reflection image.")
-
-# Track current page across reruns
-if "current_page" not in st.session_state:
-    st.session_state["current_page"] = "Home"
-
-# Update page when buttons are clicked
-if home_button:
-    st.session_state["current_page"] = "Home"
-elif gratitude_button:
-    st.session_state["current_page"] = "Gratitude"
-elif profile_button:
-    st.session_state["current_page"] = "Profile"
-elif resources_button:
-    st.session_state["current_page"] = "Resources"
-elif settings_button:
-    st.session_state["current_page"] = "Settings"
-elif talk_button:
-    st.session_state["current_page"] = "Talk"
-
-# Show the correct page based on state
-if st.session_state["current_page"] == "Home":
-    show_home_page()
-elif st.session_state["current_page"] == "Gratitude":
-    show_gratitude_journal()
-elif st.session_state["current_page"] == "Profile":
-    show_profile_page()
-elif st.session_state["current_page"] == "Resources":
-    show_resources_page()
-elif st.session_state["current_page"] == "Settings":
-    show_settings_page()
-elif st.session_state["current_page"] == "Talk":
-    st.markdown("**Talk feature coming soon.**")
+            # Only show quote and author if the image
