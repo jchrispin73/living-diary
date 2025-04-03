@@ -54,7 +54,7 @@ def show_home_page():
             selected_row = filtered.sample(n=1).iloc[0]
             quote = selected_row["quote"]
             author = selected_row["author"]
-            image_url = selected_row["image link"]
+            image_url = selected_row["imagelink"]
             st.write("Image URL:", image_url)
 
             st.markdown(f"### “{quote}”")
