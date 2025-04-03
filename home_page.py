@@ -17,38 +17,38 @@ st.set_page_config(
 # Navigation buttons - TOP OF PAGE (unchanged)
 col1, col2, col3 = st.columns([1, 1, 1])
 with col1:
-    home_button = st.button("Home", use_container_width=True)
+    home_button = st.button("Home", key="home_button", use_container_width=True)
 with col2:
-    gratitude_button = st.button("Gratitude Journal", use_container_width=True)
+    gratitude_button = st.button("Gratitude Journal", key="gratitude_button", use_container_width=True)
 with col3:
-    profile_button = st.button("Profile", use_container_width=True)
+    profile_button = st.button("Profile", key="profile_button", use_container_width=True)
 
 col4, col5, col6 = st.columns([1, 1, 1])
 with col4:
-    resources_button = st.button("Resources", use_container_width=True)
+    resources_button = st.button("Resources", key="resources_button", use_container_width=True)
 with col5:
-    settings_button = st.button("Settings", use_container_width=True)
+    settings_button = st.button("Settings", key="settings_button", use_container_width=True)
 with col6:
-    talk_button = st.button("Talk", use_container_width=True)
+    talk_button = st.button("Talk", key="talk_button", use_container_width=True)
 
 # Function to display Home Page
 def show_home_page():
     # Header with buttons and logos
     col1, col2, col3 = st.columns([1, 1, 1])
     with col1:
-        st.button("Home", use_container_width=True)
+        st.button("Home", key="home_button", use_container_width=True)
     with col2:
-        st.button("Gratitude Journal", use_container_width=True)
+        st.button("Gratitude Journal", key="gratitude_button", use_container_width=True)
     with col3:
-        st.button("Profile", use_container_width=True)
+        st.button("Profile", key="profile_button", use_container_width=True)
 
     col4, col5, col6 = st.columns([1, 1, 1])
     with col4:
-        st.button("Resources", use_container_width=True)
+        st.button("Resources", key="resources_button", use_container_width=True)
     with col5:
-        st.button("Settings", use_container_width=True)
+        st.button("Settings", key="settings_button", use_container_width=True)
     with col6:
-        st.button("Talk", use_container_width=True)
+        st.button("Talk", key="talk_button", use_container_width=True)
 
     # Display logos
     col7, col8 = st.columns([1, 0.9])
@@ -75,7 +75,7 @@ def show_home_page():
             image_url = selected_row["image link"]
             has_text = selected_row["hastext"]
 
-            # Show image under the header
+            # Show image under header
             st.image(image_url, caption="Image for reflection", use_container_width=True, width=500)
 
             # Only show quote and author if the image does NOT already have text on it
