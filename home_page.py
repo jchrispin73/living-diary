@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import random
 
 # Import other pages
 from gratitude_journal import show_gratitude_journal
@@ -15,7 +14,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Navigation buttons
+# Navigation buttons - TOP OF PAGE (unchanged)
 col1, col2, col3 = st.columns([1, 1, 1])
 with col1:
     home_button = st.button("Home", use_container_width=True)
@@ -32,27 +31,23 @@ with col5:
 with col6:
     talk_button = st.button("Talk", use_container_width=True)
 
-# ----------------------------
-# HOME PAGE FUNCTION
-# ----------------------------
-
+# Function to display Home Page
 def show_home_page():
-    # Logo and leaf layout
+    # Logo and leaf image
     col7, col8 = st.columns([1, 0.9])
     with col7:
         st.image("FullLogo_Transparent_NoBuffer.png", width=180)
     with col8:
         st.image("living diary soft place to land transparent.png", width=400)
 
-    # Load quotes CSV
+    # Load and clean the CSV
     df = pd.read_csv("Enhanced_Quote_Images_Living_Diary_new.csv")
     df.columns = df.columns.str.strip().str.lower()
     df["mood"] = df["mood"].astype(str).str.strip().str.lower()
 
-    # Check for saved mood
+    # Check for mood in session
     if "selected_mood" in st.session_state:
         mood = st.session_state["selected_mood"].strip().lower()
-
         filtered = df[df["mood"] == mood]
 
         if not filtered.empty:
@@ -63,20 +58,17 @@ def show_home_page():
 
             st.markdown(f"### “{quote}”")
             st.markdown(f"**— {author}**")
-            st.image(image_url, caption="Image for reflection", use_column_width=True)
+            st.image(image_url, caption="Image for reflection", use_container_width=True)
         else:
             st.info("No matching quote found for your mood. Try journaling again.")
     else:
         st.info("Start by journaling to see your daily quote and reflection image.")
 
-# ----------------------------
-# PAGE NAVIGATION
-# ----------------------------
-
+# Track current page across reruns
 if "current_page" not in st.session_state:
     st.session_state["current_page"] = "Home"
 
-# Handle button clicks
+# Update page when buttons are clicked
 if home_button:
     st.session_state["current_page"] = "Home"
 elif gratitude_button:
@@ -90,7 +82,7 @@ elif settings_button:
 elif talk_button:
     st.session_state["current_page"] = "Talk"
 
-# Show selected page
+# Show the correct page based on state
 if st.session_state["current_page"] == "Home":
     show_home_page()
 elif st.session_state["current_page"] == "Gratitude":
@@ -101,3 +93,5 @@ elif st.session_state["current_page"] == "Resources":
     show_resources_page()
 elif st.session_state["current_page"] == "Settings":
     show_settings_page()
+elif st.session_state["current_page"] == "Talk":
+    st.markdown("**Talk feature coming soon.**")
