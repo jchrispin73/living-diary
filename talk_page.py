@@ -7,13 +7,11 @@ def show_talk_page():
     page_bg_img = """
     <style>
     .stApp {
-    background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/main/background_talk_v2.png");
-    background-size: 90%;  /* Zoomed out to reveal more of Tara */
-    background-position: right center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
+        background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/main/background_talk_v2.png");
+        background-size: 90%;
+        background-position: right center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
     }
 
     .block-container {
@@ -29,15 +27,16 @@ def show_talk_page():
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
+    /* Transparent top nav bar */
     [data-testid="stHeader"] {
-    /* Transparent chat input */
-    .css-15zrgzn {
-    background-color: rgba(255, 255, 255, 0.0) !important;
-    box-shadow: none !important;
-    border: none !important;
-}
-
         background-color: rgba(255, 255, 255, 0);
+    }
+
+    /* Transparent chat input at the bottom */
+    [data-testid="stChatInput"] {
+        background-color: rgba(255, 255, 255, 0) !important;
+        border: none !important;
+        box-shadow: none !important;
     }
     </style>
     """
