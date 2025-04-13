@@ -3,14 +3,14 @@ import pandas as pd
 import openai
 import os
 
-# ⬇️ Must be here
+# ⬇️ Must be first Streamlit command
 st.set_page_config(
     page_title="Living Diary",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-# Now safe to add background image or anything else
+# ⬇️ Optional: light background color for all pages
 page_bg_img = """
 <style>
 [data-testid="stAppViewContainer"] > .main {
@@ -20,23 +20,14 @@ page_bg_img = """
 """
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
-# The rest of your app goes here...
-
 # Import other pages
 from gratitude_journal import show_gratitude_journal
 from profile_page import show_profile_page
 from resources_page import show_resources_page
 from settings_page import show_settings_page
-from talk_page import show_talk_page  # ✅ Updated to include Tara chat
+from talk_page import show_talk_page  # ✅ Tara page
 
-# Must be the very first Streamlit command
-st.set_page_config(
-    page_title="Living Diary",
-    layout="centered",
-    initial_sidebar_state="collapsed"
-)
-
-# Navigation buttons - TOP OF PAGE (unchanged)
+# Navigation buttons - TOP OF PAGE
 col1, col2, col3 = st.columns([1, 1, 1])
 with col1:
     home_button = st.button("Home", use_container_width=True)
@@ -119,4 +110,4 @@ elif st.session_state["current_page"] == "Resources":
 elif st.session_state["current_page"] == "Settings":
     show_settings_page()
 elif st.session_state["current_page"] == "Talk":
-    show_talk_page()  # ✅ Now properly linked to Tara's conversation page
+    show_talk_page()
