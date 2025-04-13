@@ -8,7 +8,7 @@ def show_talk_page():
     <style>
     .stApp {
     background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/main/background_talk_v2.png");
-    background-size: 100%;  /* Zoomed out to reveal more of Tara */
+    background-size: 90%;  /* Zoomed out to reveal more of Tara */
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
