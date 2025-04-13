@@ -5,7 +5,7 @@ import os
 # Set background image from GitHub repo
 page_bg_img = """
 <style>
-[data-testid="stAppViewContainer"] > .main {
+[data-testid="stAppViewContainer"] {
     background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/9e98d9a2c557d14bd61e1d7817950ed4922ed456/background_talk.png");
     background-size: cover;
     background-position: center;
