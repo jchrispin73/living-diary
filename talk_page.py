@@ -33,6 +33,22 @@ def show_talk_page():
     .stButton > button {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
+        # Navigation buttons (copied from home page for consistent layout)
+    col1, col2, col3 = st.columns([1, 1, 1])
+    with col1:
+        st.button("Home", use_container_width=True)
+    with col2:
+        st.button("Gratitude Journal", use_container_width=True)
+    with col3:
+        st.button("Profile", use_container_width=True)
+
+    col4, col5, col6 = st.columns([1, 1, 1])
+    with col4:
+        st.button("Resources", use_container_width=True)
+    with col5:
+        st.button("Settings", use_container_width=True)
+    with col6:
+        st.button("Talk", use_container_width=True)
 
     /* Transparent top nav bar */
     [data-testid="stHeader"] {
