@@ -40,3 +40,6 @@ img {
     font-size: 1.1rem;
     color: #333333;
 }
+[data-testid="stAppViewContainer"] {
+    background-color: transparent;
+}
