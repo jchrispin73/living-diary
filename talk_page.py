@@ -20,6 +20,7 @@ def show_talk_page():
         margin: 2rem auto;
     }
 
+    /* Transparent page content */
     .block-container {
         background-color: rgba(255, 255, 255, 0);
         padding: 2rem;
@@ -29,25 +30,20 @@ def show_talk_page():
         box-shadow: none;
     }
 
-    .stButton > button {
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    }
-
+    /* Transparent top nav bar */
     [data-testid="stHeader"] {
         background-color: rgba(255, 255, 255, 0);
     }
 
+    /* Transparent chat input box */
     [data-testid="stChatInput"] {
         background-color: rgba(255, 255, 255, 0) !important;
         border: none !important;
         box-shadow: none !important;
     }
 
-    footer {
-        background-color: rgba(255, 255, 255, 0) !important;
-    }
-
-    .css-1vq4p4l {
+    /* Transparent bar container for chat input */
+    footer, .css-1vq4p4l {
         background-color: rgba(255, 255, 255, 0) !important;
         box-shadow: none !important;
         border: none !important;
@@ -56,24 +52,7 @@ def show_talk_page():
     """
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
-    # Navigation buttons (same layout as Home page)
-    col1, col2, col3 = st.columns([1, 1, 1])
-    with col1:
-        st.button("Home", key="nav_home", use_container_width=True)
-    with col2:
-        st.button("Gratitude Journal", key="nav_gratitude", use_container_width=True)
-    with col3:
-        st.button("Profile", key="nav_profile", use_container_width=True)
-
-    col4, col5, col6 = st.columns([1, 1, 1])
-    with col4:
-        st.button("Resources", key="nav_resources", use_container_width=True)
-    with col5:
-        st.button("Settings", key="nav_settings", use_container_width=True)
-    with col6:
-        st.button("Talk", key="nav_talk", use_container_width=True)
-
-    # Tara welcome box
+    # Tara's soft welcome box
     st.markdown(
         """
         <div class='block-container'>
@@ -126,7 +105,7 @@ def show_talk_page():
         with st.chat_message(msg["role"]):
             st.markdown(msg["content"])
 
-    # Handle user input
+    # Handle new user input
     if user_input := st.chat_input("What's on your mind today?"):
         st.chat_message("user").markdown(user_input)
         st.session_state.messages.append({"role": "user", "content": user_input})
