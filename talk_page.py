@@ -14,8 +14,10 @@ def show_talk_page():
         background-attachment: fixed;
     }
 
-    [data-testid="stAppViewContainer"] > .main {
-        background-color: transparent;
+    /* Match Home page max-width for nav buttons */
+    [data-testid="stHorizontalBlock"] {
+        max-width: 900px;
+        margin: 2rem auto;
     }
 
     .block-container {
@@ -54,24 +56,24 @@ def show_talk_page():
     """
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
-    # Navigation buttons (match Home page layout)
+    # Navigation buttons (same layout as Home page)
     col1, col2, col3 = st.columns([1, 1, 1])
     with col1:
-        st.button("Home", use_container_width=True)
+        st.button("Home", key="nav_home", use_container_width=True)
     with col2:
-        st.button("Gratitude Journal", use_container_width=True)
+        st.button("Gratitude Journal", key="nav_gratitude", use_container_width=True)
     with col3:
-        st.button("Profile", use_container_width=True)
+        st.button("Profile", key="nav_profile", use_container_width=True)
 
     col4, col5, col6 = st.columns([1, 1, 1])
     with col4:
-        st.button("Resources", use_container_width=True)
+        st.button("Resources", key="nav_resources", use_container_width=True)
     with col5:
-        st.button("Settings", use_container_width=True)
+        st.button("Settings", key="nav_settings", use_container_width=True)
     with col6:
-        st.button("Talk", use_container_width=True)
+        st.button("Talk", key="nav_talk", use_container_width=True)
 
-    # Tara's welcome message
+    # Tara welcome box
     st.markdown(
         """
         <div class='block-container'>
@@ -124,7 +126,7 @@ def show_talk_page():
         with st.chat_message(msg["role"]):
             st.markdown(msg["content"])
 
-    # Handle new user input
+    # Handle user input
     if user_input := st.chat_input("What's on your mind today?"):
         st.chat_message("user").markdown(user_input)
         st.session_state.messages.append({"role": "user", "content": user_input})
