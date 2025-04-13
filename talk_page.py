@@ -7,7 +7,7 @@ def show_talk_page():
     page_bg_img = """
     <style>
     .stApp {
-        background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/main/background_talk.png");
+        background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/main/background_talk_v2.png");
         background-size: cover;
         background-position: right center;
         background-repeat: no-repeat;
