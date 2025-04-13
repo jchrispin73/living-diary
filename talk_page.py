@@ -14,13 +14,10 @@ def show_talk_page():
         background-attachment: fixed;
     }
 
-    /* Match Home page max-width for nav buttons */
-    [data-testid="stHorizontalBlock"] {
-        max-width: 900px;
-        margin: 2rem auto;
+    [data-testid="stAppViewContainer"] > .main {
+        background-color: transparent;
     }
 
-    /* Remove background from main content container */
     .block-container {
         background-color: rgba(255, 255, 255, 0);
         padding: 2rem;
@@ -33,7 +30,31 @@ def show_talk_page():
     .stButton > button {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
-        # Navigation buttons (copied from home page for consistent layout)
+
+    [data-testid="stHeader"] {
+        background-color: rgba(255, 255, 255, 0);
+    }
+
+    [data-testid="stChatInput"] {
+        background-color: rgba(255, 255, 255, 0) !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    footer {
+        background-color: rgba(255, 255, 255, 0) !important;
+    }
+
+    .css-1vq4p4l {
+        background-color: rgba(255, 255, 255, 0) !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+    </style>
+    """
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+
+    # Navigation buttons (match Home page layout)
     col1, col2, col3 = st.columns([1, 1, 1])
     with col1:
         st.button("Home", use_container_width=True)
@@ -50,33 +71,7 @@ def show_talk_page():
     with col6:
         st.button("Talk", use_container_width=True)
 
-    /* Transparent top nav bar */
-    [data-testid="stHeader"] {
-        background-color: rgba(255, 255, 255, 0);
-    }
-
-    /* Transparent chat input box */
-    [data-testid="stChatInput"] {
-        background-color: rgba(255, 255, 255, 0) !important;
-        border: none !important;
-        box-shadow: none !important;
-    }
-
-    /* Transparent bar container for chat input */
-    footer {
-        background-color: rgba(255, 255, 255, 0) !important;
-    }
-
-    .css-1vq4p4l {
-        background-color: rgba(255, 255, 255, 0) !important;
-        box-shadow: none !important;
-        border: none !important;
-    }
-    </style>
-    """
-    st.markdown(page_bg_img, unsafe_allow_html=True)
-
-    # Tara's soft welcome box (styled like Home page)
+    # Tara's welcome message
     st.markdown(
         """
         <div class='block-container'>
