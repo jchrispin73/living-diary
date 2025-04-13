@@ -21,7 +21,8 @@ def show_talk_page():
     }
 
     /* Remove background from main content container */
-    .block-container {
+        .block-container {
+
         background-color: rgba(255, 255, 255, 0);
         padding: 2rem;
         border-radius: 0;
