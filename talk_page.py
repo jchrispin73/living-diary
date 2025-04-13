@@ -30,6 +30,13 @@ def show_talk_page():
     }
 
     [data-testid="stHeader"] {
+    /* Transparent chat input */
+    .css-15zrgzn {
+    background-color: rgba(255, 255, 255, 0.0) !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
         background-color: rgba(255, 255, 255, 0);
     }
     </style>
