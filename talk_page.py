@@ -5,8 +5,8 @@ import os
 # Set background image from GitHub repo
 page_bg_img = """
 <style>
-[data-testid="stAppViewContainer"] {
-    background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/9e98d9a2c557d14bd61e1d7817950ed4922ed456/background_talk.png");
+[data-testid="stAppViewContainer"] > .main {
+    background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/9765a6eb0e541004a461ecbbbaa1f71c338afaa5/background_talk.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -18,6 +18,7 @@ page_bg_img = """
 </style>
 """
 st.markdown(page_bg_img, unsafe_allow_html=True)
+
 
 def show_talk_page():
     st.title("🌸 Talk to Tara")
