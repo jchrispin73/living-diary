@@ -2,6 +2,26 @@ import streamlit as st
 import openai
 import os
 
+# Set background image using custom CSS
+page_bg_img = f"""
+<style>
+[data-testid="stAppViewContainer"] > .main {{
+    background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}}
+[data-testid="stHeader"] {{
+    background-color: rgba(0, 0, 0, 0);
+}}
+[data-testid="stToolbar"] {{
+    right: 2rem;
+}}
+</style>
+"""
+st.markdown(page_bg_img, unsafe_allow_html=True)
+
 def show_talk_page():
     st.title("🌸 Talk to Tara")
     st.markdown("Tara is here to listen gently and offer wisdom, just like a supportive friend. Share whatever’s on your mind.")
@@ -55,7 +75,7 @@ def show_talk_page():
 
         with st.spinner("Tara is thinking..."):
             response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",  # Change to "gpt-4" if you like
+                model="gpt-3.5-turbo",
                 messages=st.session_state.messages,
                 temperature=0.7
             )
