@@ -37,26 +37,26 @@ def show_talk_page():
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
     # Navigation buttons - same layout as Home page
-    col1, col2, col3 = st.columns([1, 1, 1])
-    with col1:
-        if st.button("Home", use_container_width=True):
+    nav1, nav2, nav3 = st.columns([1, 1, 1])
+    with nav1:
+        if st.button("Home", key="home_btn", use_container_width=True):
             st.session_state["current_page"] = "Home"
-    with col2:
-        if st.button("Gratitude Journal", use_container_width=True):
+    with nav2:
+        if st.button("Gratitude Journal", key="journal_btn", use_container_width=True):
             st.session_state["current_page"] = "Gratitude"
-    with col3:
-        if st.button("Profile", use_container_width=True):
+    with nav3:
+        if st.button("Profile", key="profile_btn", use_container_width=True):
             st.session_state["current_page"] = "Profile"
 
-    col4, col5, col6 = st.columns([1, 1, 1])
-    with col4:
-        if st.button("Resources", use_container_width=True):
+    nav4, nav5, nav6 = st.columns([1, 1, 1])
+    with nav4:
+        if st.button("Resources", key="resources_btn", use_container_width=True):
             st.session_state["current_page"] = "Resources"
-    with col5:
-        if st.button("Settings", use_container_width=True):
+    with nav5:
+        if st.button("Settings", key="settings_btn", use_container_width=True):
             st.session_state["current_page"] = "Settings"
-    with col6:
-        if st.button("Talk", use_container_width=True):
+    with nav6:
+        if st.button("Talk", key="talk_btn", use_container_width=True):
             st.session_state["current_page"] = "Talk"
 
     # Tara's soft welcome box
