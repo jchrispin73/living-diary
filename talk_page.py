@@ -3,22 +3,21 @@ import openai
 import os
 
 # Set background image from GitHub repo
-page_bg_img = f"""
+page_bg_img = """
 <style>
-[data-testid="stAppViewContainer"] > .main {{
-    background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/main/background_talk.png");
+[data-testid="stAppViewContainer"] > .main {
+    background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/9e98d9a2c557d14bd61e1d7817950ed4922ed456/background_talk.png");
     background-size: cover;
-    background-position: right center;
+    background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-}}
-[data-testid="stHeader"], [data-testid="stToolbar"] {{
-    background-color: rgba(255, 255, 255, 0);  /* transparent */
-}}
+}
+[data-testid="stHeader"] {
+    background-color: rgba(255, 255, 255, 0);
+}
 </style>
 """
 st.markdown(page_bg_img, unsafe_allow_html=True)
-
 
 def show_talk_page():
     st.title("🌸 Talk to Tara")
