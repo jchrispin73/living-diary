@@ -4,7 +4,7 @@ import os
 
 def show_talk_page():
     # Inject custom page styles
-        page_bg_img = """
+    page_bg_img = """
     <style>
     .stApp {
         background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/main/background_talk_v2.png");
@@ -21,8 +21,7 @@ def show_talk_page():
     }
 
     /* Remove background from main content container */
-        .block-container {
-
+    .block-container {
         background-color: rgba(255, 255, 255, 0);
         padding: 2rem;
         border-radius: 0;
@@ -30,7 +29,6 @@ def show_talk_page():
         margin: 2rem 2rem 1rem 2rem;
         box-shadow: none;
     }
-
 
     .stButton > button {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -53,7 +51,6 @@ def show_talk_page():
         background-color: rgba(255, 255, 255, 0) !important;
     }
 
-    /* Transparent outer wrapper of the chat input row (Streamlit-specific class) */
     .css-1vq4p4l {
         background-color: rgba(255, 255, 255, 0) !important;
         box-shadow: none !important;
@@ -61,7 +58,7 @@ def show_talk_page():
     }
     </style>
     """
-        st.markdown(page_bg_img, unsafe_allow_html=True)
+    st.markdown(page_bg_img, unsafe_allow_html=True)
 
     # Tara's soft welcome box (styled like Home page)
     st.markdown(
@@ -78,7 +75,6 @@ def show_talk_page():
         """,
         unsafe_allow_html=True
     )
-
 
     # Load OpenAI key
     openai.api_key = st.secrets["OPENAI_API_KEY"]
