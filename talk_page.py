@@ -4,29 +4,33 @@ import os
 
 def show_talk_page():
     # Inject background style for this page
-    page_bg_img = """
+        page_bg_img = """
     <style>
     .stApp {
         background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/main/background_talk.png");
         background-size: cover;
-        background-position: center;
+        background-position: right center;  /* Make sure Tara stays visible on the right */
         background-repeat: no-repeat;
         background-attachment: fixed;
     }
 
+    /* Main content area — gently aligned left to avoid covering Tara */
     .block-container {
-        background-color: rgba(255, 255, 255, 0.85);
+        background-color: rgba(255, 255, 255, 0.80);
         padding: 2rem;
         border-radius: 1rem;
-        max-width: 800px;
-        margin: auto;
+        max-width: 700px;
+        margin: 4rem 2rem 2rem 2rem;  /* Push to left */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
+    /* Transparent header */
     [data-testid="stHeader"] {
         background-color: rgba(255, 255, 255, 0);
     }
     </style>
     """
+
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
     # Block layout to improve readability
