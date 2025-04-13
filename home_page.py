@@ -1,11 +1,14 @@
 import streamlit as st
 import pandas as pd
+import openai
+import os
 
 # Import other pages
 from gratitude_journal import show_gratitude_journal
 from profile_page import show_profile_page
 from resources_page import show_resources_page
 from settings_page import show_settings_page
+from talk_page import show_talk_page  # ✅ Updated to include Tara chat
 
 # Must be the very first Streamlit command
 st.set_page_config(
@@ -33,20 +36,17 @@ with col6:
 
 # Function to display Home Page
 def show_home_page():
-    # Display logos below the header
     col7, col8 = st.columns([1, 0.9])
     with col7:
         st.image("FullLogo_Transparent_NoBuffer.png", width=180)
     with col8:
         st.image("living diary soft place to land transparent.png", width=300)
 
-    # Load and clean the CSV
     df = pd.read_csv("Enhanced_Quote_Images_Living_Diary_new.csv")
     df.columns = df.columns.str.strip().str.lower()
     df["mood"] = df["mood"].astype(str).str.strip().str.lower()
     df["hastext"] = df["hastext"].astype(str).str.lower() == "true"
 
-    # Check for mood in session
     if "selected_mood" in st.session_state:
         mood = st.session_state["selected_mood"].strip().lower()
         filtered = df[df["mood"] == mood]
@@ -58,13 +58,10 @@ def show_home_page():
             image_url = selected_row["image link"]
             has_text = selected_row["hastext"]
 
-            # Show image under header and center it
-            col1, col2, col3 = st.columns([1, 3, 1])  # Adjust column widths to center the image
+            col1, col2, col3 = st.columns([1, 3, 1])
             with col2:
                 st.image(image_url, caption="Image for reflection", use_container_width=False, width=400)
 
-
-            # Only show quote and author if the image does NOT already have text on it
             if not has_text:
                 st.markdown(f"### “{quote}”")
                 st.markdown(f"**— {author}**")
@@ -103,4 +100,4 @@ elif st.session_state["current_page"] == "Resources":
 elif st.session_state["current_page"] == "Settings":
     show_settings_page()
 elif st.session_state["current_page"] == "Talk":
-    st.markdown("**Talk feature coming soon.**")
+    show_talk_page()  # ✅ Now properly linked to Tara's conversation page
