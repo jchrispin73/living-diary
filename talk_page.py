@@ -2,21 +2,19 @@ import streamlit as st
 import openai
 import os
 
-# Set background image using custom CSS
+# Set background image from GitHub repo
 page_bg_img = f"""
 <style>
 [data-testid="stAppViewContainer"] > .main {{
-    background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80");
+    background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/main/background_talk.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }}
-[data-testid="stHeader"] {{
+
+[data-testid="stHeader"], [data-testid="stToolbar"] {{
     background-color: rgba(0, 0, 0, 0);
-}}
-[data-testid="stToolbar"] {{
-    right: 2rem;
 }}
 </style>
 """
@@ -64,7 +62,7 @@ def show_talk_page():
         ]
 
     # Show chat history
-    for msg in st.session_state.messages[1:]:  # skip system prompt
+    for msg in st.session_state.messages[1:]:
         with st.chat_message(msg["role"]):
             st.markdown(msg["content"])
 
