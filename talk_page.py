@@ -4,7 +4,7 @@ import os
 
 def show_talk_page():
     # Inject custom page styles
-    page_bg_img = """
+        page_bg_img = """
     <style>
     .stApp {
         background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/main/background_talk_v2.png");
@@ -12,6 +12,12 @@ def show_talk_page():
         background-position: right center;
         background-repeat: no-repeat;
         background-attachment: fixed;
+    }
+
+    /* Match Home page max-width for nav buttons */
+    [data-testid="stHorizontalBlock"] {
+        max-width: 900px;
+        margin: 2rem auto;
     }
 
     /* Remove background from main content container */
@@ -23,6 +29,7 @@ def show_talk_page():
         margin: 2rem 2rem 1rem 2rem;
         box-shadow: none;
     }
+
 
     .stButton > button {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
