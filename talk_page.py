@@ -61,9 +61,9 @@ def show_talk_page():
     }
     </style>
     """
-    st.markdown(page_bg_img, unsafe_allow_html=True)
+        st.markdown(page_bg_img, unsafe_allow_html=True)
 
-        # Tara's soft welcome box (styled like Home page)
+    # Tara's soft welcome box (styled like Home page)
     st.markdown(
         """
         <div class='block-container'>
@@ -78,6 +78,7 @@ def show_talk_page():
         """,
         unsafe_allow_html=True
     )
+
 
     # Load OpenAI key
     openai.api_key = st.secrets["OPENAI_API_KEY"]
