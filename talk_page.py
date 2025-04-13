@@ -38,27 +38,8 @@ def show_talk_page():
 
     # Navigation buttons - same layout as Home page
     nav1, nav2, nav3 = st.columns([1, 1, 1])
-    with nav1:
-        if st.button("Home", key="home_btn", use_container_width=True):
-            st.session_state["current_page"] = "Home"
-    with nav2:
-        if st.button("Gratitude Journal", key="journal_btn", use_container_width=True):
-            st.session_state["current_page"] = "Gratitude"
-    with nav3:
-        if st.button("Profile", key="profile_btn", use_container_width=True):
-            st.session_state["current_page"] = "Profile"
-
     nav4, nav5, nav6 = st.columns([1, 1, 1])
-    with nav4:
-        if st.button("Resources", key="resources_btn", use_container_width=True):
-            st.session_state["current_page"] = "Resources"
-    with nav5:
-        if st.button("Settings", key="settings_btn", use_container_width=True):
-            st.session_state["current_page"] = "Settings"
-    with nav6:
-        if st.button("Talk", key="talk_btn", use_container_width=True):
-            st.session_state["current_page"] = "Talk"
-
+    
     # Tara's soft welcome box
     st.markdown(
         """
