@@ -28,10 +28,16 @@ def show_talk_page():
     }
     </style>
     """
-    st.markdown(page_bg_img, unsafe_allow_html=True)
+        st.markdown(
+        """
+        <div class='block-container'>
+            <h1 style='margin-top: 0;'>🌸 Talk to Tara</h1>
+            <p>Tara is here to listen gently and offer wisdom, just like a supportive friend. Share whatever’s on your mind.</p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-    st.title("🌸 Talk to Tara")
-    st.markdown("Tara is here to listen gently and offer wisdom, just like a supportive friend. Share whatever’s on your mind.")
 
     openai.api_key = st.secrets["OPENAI_API_KEY"]
 
