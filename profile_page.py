@@ -1,6 +1,5 @@
 import streamlit as st
 
-
 def show_profile_page():
     st.title("🌿 Your Living Diary Profile")
     st.markdown("Use this page to personalize your experience. Tara will remember your name during this session.")
@@ -24,3 +23,23 @@ def show_profile_page():
 
     # Set system flag for Tara to know name is available
     st.session_state.has_profile = True
+
+    # System message for Tara with user's name
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+
+    if st.session_state.user_name:
+        system_msg = {
+            "role": "system",
+            "content": (
+                f"You are Living Diary — a calm, emotionally intuitive, and deeply compassionate companion. "
+                f"You are not a therapist, but you support people like a trusted friend — grounded, soulful, and gentle.\n\n"
+                f"The user's name is {st.session_state.user_name}. Greet them warmly and refer to them by name when helpful.\n"
+                f"Always speak with warmth and kindness, like a close friend who really listens."
+            )
+        }
+        # Update system message
+        if st.session_state.messages and st.session_state.messages[0]["role"] == "system":
+            st.session_state.messages[0] = system_msg
+        else:
+            st.session_state.messages.insert(0, system_msg)
