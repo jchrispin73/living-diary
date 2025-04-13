@@ -4,7 +4,7 @@ import os
 
 def show_talk_page():
     # Inject background style for this page
-        page_bg_img = """
+    page_bg_img = """
     <style>
     .stApp {
         background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/main/background_talk.png");
@@ -14,7 +14,6 @@ def show_talk_page():
         background-attachment: fixed;
     }
 
-    /* Main content area — gently aligned left to avoid covering Tara */
     .block-container {
         background-color: rgba(255, 255, 255, 0.80);
         padding: 2rem;
@@ -24,25 +23,20 @@ def show_talk_page():
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    /* Transparent header */
     [data-testid="stHeader"] {
         background-color: rgba(255, 255, 255, 0);
     }
     </style>
     """
-
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
-    # Block layout to improve readability
     st.markdown("<div class='block-container'>", unsafe_allow_html=True)
 
     st.title("🌸 Talk to Tara")
     st.markdown("Tara is here to listen gently and offer wisdom, just like a supportive friend. Share whatever’s on your mind.")
 
-    # Load OpenAI API key securely
     openai.api_key = st.secrets["OPENAI_API_KEY"]
 
-    # Initial system prompt if chat is fresh
     if "messages" not in st.session_state:
         st.session_state.messages = [
             {
@@ -71,12 +65,10 @@ def show_talk_page():
             }
         ]
 
-    # Display conversation
     for msg in st.session_state.messages[1:]:
         with st.chat_message(msg["role"]):
             st.markdown(msg["content"])
 
-    # Input and reply
     if user_input := st.chat_input("What's on your mind today?"):
         st.chat_message("user").markdown(user_input)
         st.session_state.messages.append({"role": "user", "content": user_input})
