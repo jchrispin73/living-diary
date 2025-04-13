@@ -3,7 +3,7 @@ import openai
 import os
 
 def show_talk_page():
-    # Inject custom page styles
+    # Inject background + transparent styling only
     page_bg_img = """
     <style>
     .stApp {
@@ -14,13 +14,6 @@ def show_talk_page():
         background-attachment: fixed;
     }
 
-    /* Match Home page max-width for nav buttons */
-    [data-testid="stHorizontalBlock"] {
-        max-width: 900px;
-        margin: 2rem auto;
-    }
-
-    /* Transparent page content */
     .block-container {
         background-color: rgba(255, 255, 255, 0);
         padding: 2rem;
@@ -30,19 +23,16 @@ def show_talk_page():
         box-shadow: none;
     }
 
-    /* Transparent top nav bar */
     [data-testid="stHeader"] {
         background-color: rgba(255, 255, 255, 0);
     }
 
-    /* Transparent chat input box */
     [data-testid="stChatInput"] {
         background-color: rgba(255, 255, 255, 0) !important;
         border: none !important;
         box-shadow: none !important;
     }
 
-    /* Transparent bar container for chat input */
     footer, .css-1vq4p4l {
         background-color: rgba(255, 255, 255, 0) !important;
         box-shadow: none !important;
