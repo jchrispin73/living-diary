@@ -55,11 +55,18 @@ def show_talk_page():
     """
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
-    # Tara's soft welcome text (not inside a box)
+        # Tara's soft welcome box (styled like Home page)
     st.markdown(
         """
-        <h1 style='margin-top: 0;'>🌸 Talk to Tara</h1>
-        <p>Tara is here to listen gently and offer wisdom, just like a supportive friend. Share whatever’s on your mind.</p>
+        <div class='block-container'>
+            <div style="text-align: center;">
+                <h1 style='margin-top: 0;'>🌸 Talk to Tara</h1>
+                <p style="font-size: 1.1rem;">
+                    Tara is here to listen gently and offer wisdom, just like a supportive friend. <br>
+                    Share whatever’s on your mind.
+                </p>
+            </div>
+        </div>
         """,
         unsafe_allow_html=True
     )
