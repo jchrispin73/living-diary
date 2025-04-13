@@ -6,7 +6,7 @@ import os
 page_bg_img = """
 <style>
 [data-testid="stAppViewContainer"] > .main {
-    background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/main/background_talk.png");
+    background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/9765a6eb0e541004a461ecbbbaa1f71c338afaa5/background_talk.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
