@@ -2,26 +2,24 @@ import streamlit as st
 import openai
 import os
 
-# Set background image from GitHub repo
-page_bg_img = """
-<style>
-[data-testid="stAppViewContainer"] > .main {
-    background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/main/background_talk.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-[data-testid="stHeader"] {
-    background-color: rgba(255, 255, 255, 0);
-}
-</style>
-"""
-st.markdown(page_bg_img, unsafe_allow_html=True)
-
-
-
 def show_talk_page():
+    # Inject background style when this page loads
+    page_bg_img = """
+    <style>
+    [data-testid="stAppViewContainer"] > .main {
+        background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/main/background_talk.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    [data-testid="stHeader"] {
+        background-color: rgba(255, 255, 255, 0);
+    }
+    </style>
+    """
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+
     st.title("🌸 Talk to Tara")
     st.markdown("Tara is here to listen gently and offer wisdom, just like a supportive friend. Share whatever’s on your mind.")
 
