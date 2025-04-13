@@ -1,5 +1,5 @@
 import streamlit as st
-import openai
+from openai import OpenAI
 import os
 
 def show_talk_page():
@@ -38,8 +38,27 @@ def show_talk_page():
 
     # Navigation buttons - same layout as Home page
     nav1, nav2, nav3 = st.columns([1, 1, 1])
+    with nav1:
+        if st.button("Home", key="home_btn", use_container_width=True):
+            st.session_state["current_page"] = "Home"
+    with nav2:
+        if st.button("Gratitude Journal", key="journal_btn", use_container_width=True):
+            st.session_state["current_page"] = "Gratitude"
+    with nav3:
+        if st.button("Profile", key="profile_btn", use_container_width=True):
+            st.session_state["current_page"] = "Profile"
+
     nav4, nav5, nav6 = st.columns([1, 1, 1])
-    
+    with nav4:
+        if st.button("Resources", key="resources_btn", use_container_width=True):
+            st.session_state["current_page"] = "Resources"
+    with nav5:
+        if st.button("Settings", key="settings_btn", use_container_width=True):
+            st.session_state["current_page"] = "Settings"
+    with nav6:
+        if st.button("Talk", key="talk_btn", use_container_width=True):
+            st.session_state["current_page"] = "Talk"
+
     # Tara's soft welcome box
     st.markdown(
         """
@@ -56,8 +75,8 @@ def show_talk_page():
         unsafe_allow_html=True
     )
 
-    # Load OpenAI key
-    openai.api_key = st.secrets["OPENAI_API_KEY"]
+    # Initialize OpenAI client
+    client = OpenAI()
 
     # Initial system prompt
     if "messages" not in st.session_state:
@@ -99,11 +118,11 @@ def show_talk_page():
         st.session_state.messages.append({"role": "user", "content": user_input})
 
         with st.spinner("Tara is thinking..."):
-            response = openai.ChatCompletion.create(
+            response = client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=st.session_state.messages,
                 temperature=0.7
             )
-            reply = response.choices[0].message["content"]
+            reply = response.choices[0].message.content
             st.chat_message("assistant").markdown(reply)
             st.session_state.messages.append({"role": "assistant", "content": reply})
