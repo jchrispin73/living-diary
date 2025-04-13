@@ -56,8 +56,8 @@ def show_talk_page():
         unsafe_allow_html=True
     )
 
-    # Initialize OpenAI client
-    client = OpenAI()
+    # Initialize OpenAI client with API key from Streamlit secrets
+    client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
     # Initial system prompt
     if "messages" not in st.session_state:
