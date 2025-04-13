@@ -3,7 +3,7 @@ import openai
 import os
 
 def show_talk_page():
-    # Inject background + transparent styling only
+    # Inject custom page styles
     page_bg_img = """
     <style>
     .stApp {
@@ -14,25 +14,19 @@ def show_talk_page():
         background-attachment: fixed;
     }
 
-    .block-container {
-        background-color: rgba(255, 255, 255, 0);
-        padding: 2rem;
-        border-radius: 0;
-        max-width: 100%;
-        margin: 2rem 2rem 1rem 2rem;
-        box-shadow: none;
-    }
-
+    /* Transparent top nav bar */
     [data-testid="stHeader"] {
         background-color: rgba(255, 255, 255, 0);
     }
 
+    /* Transparent chat input box */
     [data-testid="stChatInput"] {
         background-color: rgba(255, 255, 255, 0) !important;
         border: none !important;
         box-shadow: none !important;
     }
 
+    /* Transparent bar container for chat input */
     footer, .css-1vq4p4l {
         background-color: rgba(255, 255, 255, 0) !important;
         box-shadow: none !important;
@@ -41,6 +35,29 @@ def show_talk_page():
     </style>
     """
     st.markdown(page_bg_img, unsafe_allow_html=True)
+
+    # Navigation buttons - same layout as Home page
+    col1, col2, col3 = st.columns([1, 1, 1])
+    with col1:
+        if st.button("Home", use_container_width=True):
+            st.session_state["current_page"] = "Home"
+    with col2:
+        if st.button("Gratitude Journal", use_container_width=True):
+            st.session_state["current_page"] = "Gratitude"
+    with col3:
+        if st.button("Profile", use_container_width=True):
+            st.session_state["current_page"] = "Profile"
+
+    col4, col5, col6 = st.columns([1, 1, 1])
+    with col4:
+        if st.button("Resources", use_container_width=True):
+            st.session_state["current_page"] = "Resources"
+    with col5:
+        if st.button("Settings", use_container_width=True):
+            st.session_state["current_page"] = "Settings"
+    with col6:
+        if st.button("Talk", use_container_width=True):
+            st.session_state["current_page"] = "Talk"
 
     # Tara's soft welcome box
     st.markdown(
