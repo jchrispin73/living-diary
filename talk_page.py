@@ -14,13 +14,14 @@ def show_talk_page():
         background-attachment: fixed;
     }
 
+    /* Remove background from main content container */
     .block-container {
-        background-color: rgba(255, 255, 255, 0.75);
+        background-color: rgba(255, 255, 255, 0);
         padding: 2rem;
-        border-radius: 1.5rem;
-        max-width: 600px;
-        margin: 3rem 2rem 2rem 3rem;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        border-radius: 0;
+        max-width: 100%;
+        margin: 2rem 2rem 1rem 2rem;
+        box-shadow: none;
     }
 
     .stButton > button {
@@ -32,23 +33,33 @@ def show_talk_page():
         background-color: rgba(255, 255, 255, 0);
     }
 
-    /* Transparent chat input at the bottom */
+    /* Transparent chat input box */
     [data-testid="stChatInput"] {
         background-color: rgba(255, 255, 255, 0) !important;
         border: none !important;
         box-shadow: none !important;
     }
+
+    /* Transparent bar container for chat input */
+    footer {
+        background-color: rgba(255, 255, 255, 0) !important;
+    }
+
+    /* Transparent outer wrapper of the chat input row (Streamlit-specific class) */
+    .css-1vq4p4l {
+        background-color: rgba(255, 255, 255, 0) !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
     </style>
     """
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
-    # Tara's soft welcome box
+    # Tara's soft welcome text (not inside a box)
     st.markdown(
         """
-        <div class='block-container'>
-            <h1 style='margin-top: 0;'>🌸 Talk to Tara</h1>
-            <p>Tara is here to listen gently and offer wisdom, just like a supportive friend. Share whatever’s on your mind.</p>
-        </div>
+        <h1 style='margin-top: 0;'>🌸 Talk to Tara</h1>
+        <p>Tara is here to listen gently and offer wisdom, just like a supportive friend. Share whatever’s on your mind.</p>
         """,
         unsafe_allow_html=True
     )
