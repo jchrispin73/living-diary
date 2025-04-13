@@ -8,17 +8,17 @@ page_bg_img = f"""
 [data-testid="stAppViewContainer"] > .main {{
     background-image: url("https://raw.githubusercontent.com/jchrispin73/living-diary/main/background_talk.png");
     background-size: cover;
-    background-position: center;
+    background-position: right center;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }}
-
 [data-testid="stHeader"], [data-testid="stToolbar"] {{
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0);  /* transparent */
 }}
 </style>
 """
 st.markdown(page_bg_img, unsafe_allow_html=True)
+
 
 def show_talk_page():
     st.title("🌸 Talk to Tara")
