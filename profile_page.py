@@ -6,17 +6,17 @@ def show_profile_page():
 
     # Load saved name if available
     if "user_name" not in st.session_state:
-        st.session_state.user_name = ""
+        st.session_state["user_name"] = ""
 
-    # Form for user name
+    # Profile form
     with st.form("profile_form"):
-        name_input = st.text_input("What should Tara call you?", value=st.session_state.user_name)
+        name_input = st.text_input("What should Tara call you?", value=st.session_state["user_name"])
         submitted = st.form_submit_button("Save")
 
         if submitted:
-            st.session_state.user_name = name_input
+            st.session_state["user_name"] = name_input
             st.success(f"Got it! Tara will call you **{name_input}** during this session.")
 
-    # Show saved name if available
-    if st.session_state.user_name:
-        st.markdown(f"✅ **Tara will greet you as:** {st.session_state.user_name}")
+    # Show stored name confirmation
+    if st.session_state["user_name"]:
+        st.markdown(f"✅ **Tara will greet you as:** `{st.session_state['user_name']}`")
